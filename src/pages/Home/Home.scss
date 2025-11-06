@@ -1,5 +1,41 @@
 @import "../../styles/variables";
 
+//Animations
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes titleReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+    filter: blur(4px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+// Home 
 .home {
   position: relative;
   width: 100%;
@@ -16,9 +52,9 @@
     height: 100%;
     object-fit: cover;
     z-index: 0;
-    filter: brightness(55%);
+    filter: brightness(95%);
+    animation: fadeIn 1.2s ease-out;
   }
-
   .video-overlay {
     position: absolute;
     inset: 0;
@@ -30,53 +66,59 @@
     position: relative;
     z-index: 2;
     color: $color-cream;
-    max-width: 1000px;
+    max-width: 1500px;
     margin-left: 7%;
     text-align: left;
 
-    h1 {
+    .home-title {
       font-family: $font-title;
-      font-size: 8rem;
+      font-size: 9.5em;
       line-height: 0.7;
       margin-bottom: 0.4rem;
+
+      .letter {
+        display: inline-block;
+        opacity: 0;
+        animation: titleReveal 0.7s ease-out forwards;
+      }
     }
 
-    h2 {
+    .home-subtitle {
       font-family: $font-body;
-      font-size: 2.5rem;
+      font-size: 2rem;
       margin-bottom: 1.3rem;
-      font-weight: 400;
+      font-weight: 600;
+      opacity: 0;
+      animation: fadeInUp 1s ease-out 0.6s forwards;
     }
 
-    p {
+    .home-desc {
       font-family: $font-body;
-      font-size: 1.3rem;
+      font-size: 1.15rem;
       line-height: 1.6;
       max-width: 800px;
+      opacity: 0;
+      animation: fadeInUp 1s ease-out 0.9s forwards;
     }
   }
 
   .scroll-arrow {
     position: absolute;
-    bottom: 2.2rem;
+    bottom: 4rem;
     left: 50%;
     transform: translateX(-50%);
     cursor: pointer;
     z-index: 3;
+    opacity: 0;
+    animation: fadeIn 1s ease-out 1.2s forwards;
 
     span {
-      color: $color-cream;
-      font-size: 2.2rem;
-      animation: bounce 1.6s infinite;
-    }
-
-    @keyframes bounce {
-      0%, 100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(6px);
-      }
+      display: block;
+      width: 20px;
+      height: 20px;
+      border-bottom: 4px solid $color-cream;
+      border-right: 4px solid $color-cream;
+      transform: rotate(45deg);
     }
   }
 }

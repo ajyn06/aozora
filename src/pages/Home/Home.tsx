@@ -21,9 +21,19 @@ const Home = () => {
       <div className="video-overlay"></div>
 
       <div className="home-content">
-        <h1>Taste the Serenity</h1>
-        <h2>of the Sea Under Aozora.</h2>
-        <p>
+        <h1 className="home-title">
+          {["T", "a", "s", "t", "e", " ", "t", "h", "e", " ", "S", "e", "r", "e", "n", "i", "t", "y"].map((char, index) => (
+            <span 
+              key={index} 
+              className="letter"
+              style={{ animationDelay: `${index * 0.05}s` }}
+            >
+              {char === " " ? "\u00A0" : char}
+            </span>
+          ))}
+        </h1>
+        <h2 className="home-subtitle">of the Sea Under Aozora.</h2>
+        <p className="home-desc">
           Welcome to Aozora, Every dish is crafted with precision, 
           honoring Japan’s finest traditions while embracing modern refinement. 
           Step into a world where flavors flow like waves beneath a boundless blue 
@@ -32,7 +42,7 @@ const Home = () => {
       </div>
 
       <div className="scroll-arrow" onClick={scrollDown}>
-        <span>⌄</span>
+        <span></span>
       </div>
     </section>
   );

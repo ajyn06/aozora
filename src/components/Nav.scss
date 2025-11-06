@@ -8,7 +8,7 @@
   transition: background 0.3s ease;
 
   &.visible {
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.588);
     backdrop-filter: blur(5px);
   }
 }
@@ -17,10 +17,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 2rem 3rem;
+  padding: 2.2rem 3rem;
 
   .logo {
-    height: 60px;
+    height: 65px;
     width: auto;
     z-index: 45;
   }
@@ -57,7 +57,7 @@
     }
 
     .close-icon {
-      font-size: 2rem;
+      font-size: 3rem;
       color: $color-cream;
       line-height: 1;
     }
@@ -95,6 +95,8 @@
         color: $color-white;
         text-decoration: none;
         transition: all 0.3s ease;
+        display: inline-block;
+        padding-bottom: 5px;
 
         &:hover {
           opacity: 0.6;
@@ -102,6 +104,7 @@
 
         &.active {
           text-decoration: underline;
+          text-underline-offset: 10px;
         }
       }
     }

@@ -1,24 +1,25 @@
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import { useRef } from "react";
+import { Link } from "react-router-dom";
 import "./Home.scss";
 
 const Home = () => {
+  const storyRef = useRef<HTMLDivElement>(null);
+  const chefRef = useRef(null);
+
   const scrollDown = () => {
-    window.scrollTo({
-      top: window.innerHeight,
-      behavior: "smooth",
-    });
+    if (storyRef.current) {
+      storyRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
   };
 
-  // Refs for scroll animations
-  const storyRef = useRef(null);
-  const chefRef = useRef(null);
-  const storyInView = useInView(storyRef, { once: true, amount: 0.3 });
-  const chefInView = useInView(chefRef, { once: true, amount: 0.2 });
   const title = "Taste the Serenity";
   const letters = title.split("");
 
-  // Animation
+  // Top Home Animation
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -73,108 +74,104 @@ const Home = () => {
     },
   };
 
+  // Our Story & Chef Animations
   const storyTitleVariants = {
-    hidden: { opacity: 0, y: 20 },
+    hidden: { 
+      opacity: 0, 
+      y: 60,
+    },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.8,
-        ease: [0.22, 1, 0.36, 1] as const,
-      },
-    },
-  };
-
-  const storyTextStagger = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.3,
+        duration: 1.2,
+        ease: [0.25, 0.1, 0.25, 1] as const,
       },
     },
   };
 
   const storyTextVariants = {
-    hidden: { opacity: 0, y: 15 },
-    visible: {
+    hidden: { 
+      opacity: 0,
+      y: 30,
+    },
+    visible: (i: number) => ({
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.7,
-        ease: [0.22, 1, 0.36, 1] as const,
+        duration: 1,
+        delay: i * 0.15,
+        ease: [0.25, 0.1, 0.25, 1] as const,
       },
-    },
+    }),
   };
 
-  const imageStagger = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.12,
-        delayChildren: 0.4,
-      },
+  const storyImageVariants = {
+    hidden: { 
+      opacity: 0,
+      y: 50,
+      scale: 0.95,
     },
-  };
-
-  const imageVariants = {
-    hidden: { opacity: 0, scale: 0.96 },
-    visible: {
+    visible: (i: number) => ({
       opacity: 1,
+      y: 0,
       scale: 1,
       transition: {
-        duration: 0.6,
-        ease: [0.22, 1, 0.36, 1] as const,
+        duration: 1.2,
+        delay: i * 0.1,
+        ease: [0.25, 0.1, 0.25, 1] as const,
       },
-    },
-  };
-
-  const chefContainerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.2,
-      },
-    },
+    }),
   };
 
   const chefImageVariants = {
-    hidden: { opacity: 0 },
+    hidden: { 
+      opacity: 0,
+      x: -60,
+      scale: 0.95,
+    },
     visible: {
       opacity: 1,
+      x: 0,
+      scale: 1,
       transition: {
-        duration: 0.8,
-        ease: [0.22, 1, 0.36, 1] as const,
+        duration: 1.4,
+        ease: [0.25, 0.1, 0.25, 1] as const,
       },
     },
   };
 
-  const chefTextStagger = {
-    hidden: { opacity: 0 },
+  const chefContentVariants = {
+    hidden: { 
+      opacity: 0,
+      x: 60,
+    },
     visible: {
       opacity: 1,
+      x: 0,
       transition: {
-        staggerChildren: 0.12,
-        delayChildren: 0.3,
+        duration: 1.2,
+        ease: [0.25, 0.1, 0.25, 1] as const,
       },
     },
   };
 
   const chefTextVariants = {
-    hidden: { opacity: 0, y: 15 },
-    visible: {
+    hidden: { 
+      opacity: 0,
+      y: 20,
+    },
+    visible: (i: number) => ({
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.6,
-        ease: [0.22, 1, 0.36, 1] as const,
+        duration: 0.9,
+        delay: 0.3 + (i * 0.12),
+        ease: [0.25, 0.1, 0.25, 1] as const,
       },
-    },
+    }),
   };
+
 
   return (
     <>
@@ -239,20 +236,29 @@ const Home = () => {
           initial="hidden"
           animate="visible"
           transition={{ delay: 1.2 }}
+          whileInView={{
+            y: [0, 15, 0],
+            transition: {
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut",
+            },
+          }}
         >
           <span></span>
         </motion.div>
       </section>
 
-      {/* About Section */}
+      {/* Our Story and Chef */}
       <section className="about">
         <div className="about-container">
-          {/* Our Story Section */}
+          {/* Our Story */}
           <div className="story-section" ref={storyRef}>
             <motion.div 
               className="story-content"
               initial="hidden"
-              animate={storyInView ? "visible" : "hidden"}
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.4, margin: "-100px" }}
             >
               <motion.h2 
                 className="story-title"
@@ -260,70 +266,75 @@ const Home = () => {
               >
                 Our Story
               </motion.h2>
-              <motion.div
-                variants={storyTextStagger}
-              >
+              <div>
                 <motion.p 
                   className="story-intro"
+                  custom={0}
                   variants={storyTextVariants}
                 >
                   Beneath the vast blue sky — Aozora — lies the harmony of sea and spirit.
                 </motion.p>
                 <motion.p 
                   className="story-text"
+                  custom={1}
                   variants={storyTextVariants}
                 >
                   Born from a passion for purity and precision, Aozora reimagines traditional Japanese dining as an immersive experience of serenity, balance, and beauty.
                 </motion.p>
                 <motion.p 
                   className="story-text"
+                  custom={2}
                   variants={storyTextVariants}
                 >
                   Each dish reflects our devotion to nature's rhythm, the artistry of simplicity, and the fleeting perfection of every season — shun (旬).
                 </motion.p>
-              </motion.div>
+              </div>
             </motion.div>
             <motion.div 
               className="story-images"
               initial="hidden"
-              animate={storyInView ? "visible" : "hidden"}
-              variants={imageStagger}
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3, margin: "-100px" }}
             >
               <motion.img 
                 src="/Home/about-1.jpg" 
                 alt="Dining experience" 
                 className="story-img"
-                variants={imageVariants}
+                custom={0}
+                variants={storyImageVariants}
               />
               <motion.img 
                 src="/Home/about-2.jpg" 
                 alt="Sushi preparation" 
                 className="story-img"
-                variants={imageVariants}
+                custom={1}
+                variants={storyImageVariants}
               />
               <motion.img 
                 src="/Home/about-3.jpg" 
                 alt="Sushi plate" 
                 className="story-img"
-                variants={imageVariants}
+                custom={2}
+                variants={storyImageVariants}
               />
               <motion.img 
                 src="/Home/about-4.jpg" 
                 alt="Chef at work" 
                 className="story-img"
-                variants={imageVariants}
+                custom={3}
+                variants={storyImageVariants}
               />
             </motion.div>
           </div>
         </div>
 
-        {/* Chef Section - Full Width */}
+        {/* Chef */}
         <div className="chef-section" ref={chefRef}>
           <motion.div 
             className="chef-section-inner"
             initial="hidden"
-            animate={chefInView ? "visible" : "hidden"}
-            variants={chefContainerVariants}
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3, margin: "-100px" }}
           >
             <motion.div 
               className="chef-image-container"
@@ -332,7 +343,14 @@ const Home = () => {
               <img src="/Home/chef.jpg" alt="Chef Haruto Sakamoto" className="chef-img" />
               <motion.div 
                 className="chef-quote"
-                variants={chefTextVariants}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ 
+                  duration: 1,
+                  delay: 0.6,
+                  ease: [0.25, 0.1, 0.25, 1],
+                }}
               >
                 <p className="quote-text">
                   "The soul of sushi is not in its form, but in the silence between flavors."
@@ -342,34 +360,39 @@ const Home = () => {
             </motion.div>
             <motion.div 
               className="chef-content"
-              variants={chefTextStagger}
+              variants={chefContentVariants}
             >
               <motion.h2 
                 className="chef-name"
+                custom={0}
                 variants={chefTextVariants}
               >
                 Chef Haruto
               </motion.h2>
               <motion.h3 
                 className="chef-surname"
+                custom={1}
                 variants={chefTextVariants}
               >
                 Sakamoto
               </motion.h3>
               <motion.p 
                 className="chef-intro"
+                custom={2}
                 variants={chefTextVariants}
               >
                 Trained in Tokyo and refined in Michelin-starred kitchens across Kyoto and Paris, Chef Haruto brings over 20 years of mastery to the art of sushi.
               </motion.p>
               <motion.p 
                 className="chef-text"
+                custom={3}
                 variants={chefTextVariants}
               >
                 Guided by discipline, harmony, and respect for ingredients, his craft bridges traditional Edomae techniques with modern sensibility.
               </motion.p>
               <motion.p 
                 className="chef-text"
+                custom={4}
                 variants={chefTextVariants}
               >
                 Each plate is composed like a painting — a moment of beauty meant to be experienced, not merely consumed.
@@ -377,6 +400,151 @@ const Home = () => {
             </motion.div>
           </motion.div>
         </div>
+      </section>
+
+      {/* View Menu Section */}
+      <section className="menu-section">
+        <motion.div 
+          className="menu-container"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+        >
+          <motion.div 
+            className="menu-image"
+            initial={{ opacity: 0, x: -60 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ 
+              duration: 1.2,
+              ease: [0.25, 0.1, 0.25, 1],
+            }}
+          >
+            <img src="/Home/view-menu.png" alt="Sushi with chopsticks" />
+          </motion.div>
+          <motion.div 
+            className="menu-content"
+            initial={{ opacity: 0, x: 60 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ 
+              duration: 1.2,
+              ease: [0.25, 0.1, 0.25, 1],
+            }}
+          >
+            <motion.h3 
+              className="menu-subtitle"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ 
+                duration: 0.8,
+                delay: 0.2,
+                ease: [0.25, 0.1, 0.25, 1],
+              }}
+            >
+              Experience the
+            </motion.h3>
+            <motion.h2 
+              className="menu-title"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ 
+                duration: 0.8,
+                delay: 0.3,
+                ease: [0.25, 0.1, 0.25, 1],
+              }}
+            >
+              Art of Flavor
+            </motion.h2>
+            <motion.p 
+              className="menu-desc"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ 
+                duration: 0.8,
+                delay: 0.4,
+                ease: [0.25, 0.1, 0.25, 1],
+              }}
+            >
+              Discover the harmony of tradition and innovation in every dish. Our menu celebrates the seasons, crafted with precision and the freshest ingredients from sea and sky.
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ 
+                duration: 0.8,
+                delay: 0.5,
+                ease: [0.25, 0.1, 0.25, 1],
+              }}
+            >
+              <Link to="/menu" className="menu-btn">
+                View Our Menu
+              </Link>
+            </motion.div>
+          </motion.div>
+        </motion.div>
+      </section>
+
+      {/* Gallery Section */}
+      <section className="gallery-section">
+        <motion.div 
+          className="gallery-scroll"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, delay: 0.3 }}
+        >
+          <motion.div 
+            className="gallery-track"
+            drag="x"
+            dragConstraints={{ left: -1900, right: 0 }}
+            dragElastic={0}
+            dragTransition={{ bounceStiffness: 600, bounceDamping: 30 }}
+          >
+            {[
+              '/Home/gallery-1.jpg',
+              '/Home/gallery-2.jpg',
+              '/Home/gallery-3.jpg',
+              '/Home/gallery-4.jpg',
+              '/Home/gallery-5.jpg',
+              '/Home/gallery-6.jpg',
+              '/Home/gallery-7.jpg',
+              '/Home/gallery-8.jpg',
+            ].map((src, index) => (
+              <motion.div
+                key={index}
+                className="gallery-item"
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.3 }}
+              >
+                <img src={src} alt={`Gallery ${index + 1}`} />
+              </motion.div>
+            ))}
+          </motion.div>
+        </motion.div>
+
+        <motion.div 
+          className="gallery-header"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ 
+            duration: 0.8,
+            ease: [0.25, 0.1, 0.25, 1],
+          }}
+        >
+          <div className="gallery-title-section">
+            <h3 className="gallery-subtitle">A Glimpse Into</h3>
+            <h2 className="gallery-title">Aozora</h2>
+          </div>
+          <p className="gallery-desc">
+            Step inside a world where every detail is artfully composed. From the delicate textures of our sushi to the calm beauty of our space, each image reflects the harmony and craftsmanship at the heart of Aozora.
+          </p>
+        </motion.div>
       </section>
     </>
   );

@@ -1,6 +1,6 @@
 @import "../../styles/variables";
 
-// Home 
+// Top Home 
 .home {
   position: relative;
   width: 100%;
@@ -82,7 +82,7 @@
   }
 }
 
-// About Section
+// Our Story & Chef Section
 .about {
   background-color: $color-white;
   padding: 80px 0 0 0;
@@ -93,11 +93,10 @@
     padding: 0 60px;
   }
 
-  // Story Section
   .story-section {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 60px;
+    gap: 80px;
     margin-bottom: 20px;
     position: relative;
     z-index: 2;
@@ -111,23 +110,20 @@
         font-size: 4rem;
         color: $color-blue;
         margin-bottom: 30px;
-        line-height: 1.2;
       }
 
       .story-intro {
         font-family: $font-body;
         font-size: 1rem;
         color: $color-blue;
-        margin-bottom: 20px;
-        line-height: 1.7;
+        margin-bottom: -5px;
       }
 
       .story-text {
         font-family: $font-body;
         font-size: 1rem;
         color: $color-blue;
-        margin-bottom: 10px;
-        line-height: 1.7;
+        margin-bottom: -5px;
       }
     }
 
@@ -145,7 +141,6 @@
     }
   }
 
-  // Chef Section
   .chef-section {
     background-color: $color-blue;
     padding: 140px 0 80px 0;
@@ -191,7 +186,7 @@
         .quote-author {
           font-family: $font-body;
           font-size: 0.9rem;
-          color: #e8e4d9;
+          color: $color-cream;
           font-weight: 600;
         }
       }
@@ -201,13 +196,13 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-      padding-top: 40px;
-      color: #e8e4d9;
+      padding-top: 90px;
+      color: $color-cream;
 
       .chef-name {
         font-family: $font-title;
         font-size: 5rem;
-        color: #e8e4d9;
+        color: $color-cream;
         margin-bottom: -25px;
         line-height: 0.9;
       }
@@ -216,27 +211,201 @@
         font-family: $font-body;
         font-size: 1.8rem;
         color: $color-cream;
-        margin-bottom: 35px;
+        margin-bottom: 15px;
         font-weight: 300;
       }
 
       .chef-intro {
         font-family: $font-body;
-        font-size: 1.1rem;
+        font-size: 1rem;
         color: $color-cream;
-        margin-bottom: 10px;
-        line-height: 1.8;
+        line-height: 1.5;
+        margin-bottom: -1px;
         max-width: 500px;
       }
 
       .chef-text {
         font-family: $font-body;
-        font-size: 1.1rem;
+        font-size: 1rem;
         color: $color-cream;
-        margin-bottom: 10px;
-        line-height: 1.8;
+        line-height: 1.5;
+        margin-bottom: -1px;
         max-width: 500px;
       }
+    }
+  }
+}
+
+// Menu Section
+.menu-section {
+  background-color: $color-white;
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+
+  .menu-container {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 0;
+    align-items: center;
+
+    .menu-image {
+      position: relative;
+      width: 100%;
+      height: 600px;
+      margin: 0;
+      padding: 0;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: left center;
+        border-radius: 0;
+        display: block;
+      }
+    }
+
+    .menu-content {
+      padding: 0 80px 0 80px;
+
+      .menu-subtitle {
+        font-family: $font-body;
+        font-size: 2.2rem;
+        color: $color-blue;
+        margin-bottom: -50px;
+        font-weight: 400;
+      }
+
+      .menu-title {
+        font-family: $font-title;
+        font-size: 5rem;
+        color: $color-blue;
+        margin-bottom: 25px;
+        line-height: 1;
+        font-weight: 700;
+      }
+
+      .menu-desc {
+        font-family: $font-body;
+        font-size: 1.1rem;
+        color: $color-blue;
+        line-height: 1.7;
+        margin-bottom: 35px;
+        max-width: 500px;
+      }
+
+      .menu-btn {
+        display: inline-block;
+        font-family: $font-body;
+        font-size: 1rem;
+        color: $color-white;
+        background-color: $color-blue;
+        padding: 14px 40px;
+        text-decoration: none;
+        border-radius: 0;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        letter-spacing: 0.5px;
+
+        &:hover {
+          background-color: darken($color-blue, 8%);
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+      }
+    }
+  }
+}
+
+// Gallery Section
+.gallery-section {
+  background-color: $color-cream;
+  padding: 80px 0 100px 0;
+
+  .gallery-scroll {
+    width: 100%;
+    overflow: hidden;
+    cursor: grab;
+    padding: 0;
+    margin: 0 auto 80px auto;
+    max-width: 100%;
+
+    &:active {
+      cursor: grabbing;
+    }
+
+    .gallery-track {
+      display: flex;
+      gap: 30px;
+      width: fit-content;
+      padding-left: 0;
+
+      .gallery-item {
+        flex-shrink: 0;
+        width: 400px;
+        height: 400px;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+          user-select: none;
+          pointer-events: none;
+        }
+
+        &:hover {
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+      }
+    }
+  }
+
+  .gallery-header {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 80px;
+
+    .gallery-title-section {
+      flex-shrink: 0;
+
+      .gallery-subtitle {
+        font-family: $font-body;
+        font-size: 1.5rem;
+        color: $color-blue;
+        margin-bottom: -55px;
+        font-weight: 400;
+      }
+
+      .gallery-title {
+        font-family: $font-title;
+        font-size: 4.8rem;
+        color: $color-blue;
+        margin-bottom: 0;
+        line-height: 1;
+        font-weight: 700;
+      }
+    }
+
+    .gallery-desc {
+      font-family: $font-body;
+      font-size: 1.1rem;
+      color: $color-blue;
+      line-height: 1.7;
+      max-width: 550px;
+      padding-top: 10px;
     }
   }
 }

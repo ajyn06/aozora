@@ -546,6 +546,75 @@ const Home = () => {
           </p>
         </motion.div>
       </section>
+
+      {/* Book/Reserve Section */}
+      <section className="book-section">
+        <div className="book-overlay"></div>
+        <motion.div 
+          className="book-content"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ 
+            duration: 1,
+            ease: [0.25, 0.1, 0.25, 1],
+          }}
+        >
+          <motion.h3 
+            className="book-subtitle"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ 
+              duration: 0.8,
+              delay: 0.2,
+              ease: [0.25, 0.1, 0.25, 1],
+            }}
+          >
+            Book Your
+          </motion.h3>
+          <motion.h2 
+            className="book-title"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ 
+              duration: 0.8,
+              delay: 0.3,
+              ease: [0.25, 0.1, 0.25, 1],
+            }}
+          >
+            Aozora Experience
+          </motion.h2>
+          <motion.p 
+            className="book-desc"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ 
+              duration: 0.8,
+              delay: 0.4,
+              ease: [0.25, 0.1, 0.25, 1],
+            }}
+          >
+            From delicate omakase to elegant seasonal courses, every detail is prepared to offer a dining experience like no other.
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ 
+              duration: 0.8,
+              delay: 0.5,
+              ease: [0.25, 0.1, 0.25, 1],
+            }}
+          >
+            <Link to="/book" className="book-btn">
+              Book Now
+            </Link>
+          </motion.div>
+        </motion.div>
+      </section>
     </>
   );
 };

@@ -1,40 +1,5 @@
 @import "../../styles/variables";
 
-//Animations
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes titleReveal {
-  0% {
-    opacity: 0;
-    transform: translateY(50px);
-    filter: blur(4px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
-  }
-}
-
 // Home 
 .home {
   position: relative;
@@ -53,8 +18,8 @@
     object-fit: cover;
     z-index: 0;
     filter: brightness(95%);
-    animation: fadeIn 1.2s ease-out;
   }
+  
   .video-overlay {
     position: absolute;
     inset: 0;
@@ -79,8 +44,6 @@
 
       .letter {
         display: inline-block;
-        opacity: 0;
-        animation: titleReveal 0.7s ease-out forwards;
       }
     }
 
@@ -90,8 +53,6 @@
       margin-bottom: 1.3rem;
       color: $color-cream-light;
       font-weight: 600;
-      opacity: 0;
-      animation: fadeInUp 1s ease-out 0.6s forwards;
     }
 
     .home-desc {
@@ -99,8 +60,6 @@
       font-size: 1.15rem;
       line-height: 1.6;
       max-width: 800px;
-      opacity: 0;
-      animation: fadeInUp 1s ease-out 0.9s forwards;
     }
   }
 
@@ -111,8 +70,6 @@
     transform: translateX(-50%);
     cursor: pointer;
     z-index: 3;
-    opacity: 0;
-    animation: fadeIn 1s ease-out 1.2s forwards;
 
     span {
       display: block;
@@ -121,6 +78,165 @@
       border-bottom: 4px solid $color-cream;
       border-right: 4px solid $color-cream;
       transform: rotate(45deg);
+    }
+  }
+}
+
+// About Section
+.about {
+  background-color: $color-white;
+  padding: 80px 0 0 0;
+
+  .about-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 60px;
+  }
+
+  // Story Section
+  .story-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 2;
+
+    .story-content {
+      padding-top: 20px;
+      padding-bottom: 200px;
+
+      .story-title {
+        font-family: $font-title;
+        font-size: 4rem;
+        color: $color-blue;
+        margin-bottom: 30px;
+        line-height: 1.2;
+      }
+
+      .story-intro {
+        font-family: $font-body;
+        font-size: 1rem;
+        color: $color-blue;
+        margin-bottom: 20px;
+        line-height: 1.7;
+      }
+
+      .story-text {
+        font-family: $font-body;
+        font-size: 1rem;
+        color: $color-blue;
+        margin-bottom: 10px;
+        line-height: 1.7;
+      }
+    }
+
+    .story-images {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+
+      .story-img {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+    }
+  }
+
+  // Chef Section
+  .chef-section {
+    background-color: $color-blue;
+    padding: 140px 0 80px 0;
+    margin: -150px 0 0 0;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    
+    .chef-section-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 60px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: start;
+    }
+
+    .chef-image-container {
+      position: relative;
+      max-width: 520px;
+
+      .chef-img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+      }
+
+      .chef-quote {
+        margin-top: 20px;
+        padding: 0;
+
+        .quote-text {
+          font-family: $font-body;
+          font-size: 1rem;
+          color: $color-cream;
+          font-style: italic;
+          margin-bottom: -10px;
+          line-height: 1.6;
+        }
+
+        .quote-author {
+          font-family: $font-body;
+          font-size: 0.9rem;
+          color: #e8e4d9;
+          font-weight: 600;
+        }
+      }
+    }
+
+    .chef-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding-top: 40px;
+      color: #e8e4d9;
+
+      .chef-name {
+        font-family: $font-title;
+        font-size: 5rem;
+        color: #e8e4d9;
+        margin-bottom: -25px;
+        line-height: 0.9;
+      }
+
+      .chef-surname {
+        font-family: $font-body;
+        font-size: 1.8rem;
+        color: $color-cream;
+        margin-bottom: 35px;
+        font-weight: 300;
+      }
+
+      .chef-intro {
+        font-family: $font-body;
+        font-size: 1.1rem;
+        color: $color-cream;
+        margin-bottom: 10px;
+        line-height: 1.8;
+        max-width: 500px;
+      }
+
+      .chef-text {
+        font-family: $font-body;
+        font-size: 1.1rem;
+        color: $color-cream;
+        margin-bottom: 10px;
+        line-height: 1.8;
+        max-width: 500px;
+      }
     }
   }
 }

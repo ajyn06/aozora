@@ -5,11 +5,16 @@
   top: 0;
   width: 100%;
   z-index: 40;
-  transition: background 0.3s ease;
+  transform: translateY(0);
+  transition: transform 0.3s ease, background 0.3s ease;
 
-  &.visible {
-    background: rgba(0, 0, 0, 0.588);
-    backdrop-filter: blur(5px);
+  &.hidden {
+    transform: translateY(-100%);
+  }
+
+  &.visible.scrolled {
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(10px);
   }
 }
 
@@ -17,10 +22,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 2.2rem 3rem;
+  padding: 1.2rem 3rem;
 
   .logo {
-    height: 65px;
+    height: 60px;
     width: auto;
     z-index: 20;
     position: relative;
@@ -55,7 +60,7 @@
       width: 26px;
       height: 3px;
       background: $color-cream;
-      margin: 4px 0;
+      margin: 3px 0;
       transition: all 0.3s ease;
     }
 
@@ -124,9 +129,9 @@
       margin: 2rem 0;
 
       a {
-        font-family: $font-body;
+        font-family: $font-title;
         font-size: 1.3rem;
-        color: $color-white;
+        color: $color-cream;
         text-decoration: none;
         transition: all 0.3s ease;
         display: inline-block;

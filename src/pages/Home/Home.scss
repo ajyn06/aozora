@@ -3,7 +3,7 @@
 // Top Home 
 .home {
   position: relative;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   overflow: hidden;
   display: flex;
@@ -57,7 +57,7 @@
 
     .home-desc {
       font-family: $font-body;
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       line-height: 1.6;
       max-width: 800px;
     }
@@ -109,7 +109,7 @@
         font-family: $font-title;
         font-size: 4rem;
         color: $color-blue;
-        margin-bottom: 30px;
+        margin-bottom: 10px;
       }
 
       .story-intro {
@@ -291,7 +291,7 @@
 
       .menu-desc {
         font-family: $font-body;
-        font-size: 1.1rem;
+        font-size: 1rem;
         color: $color-blue;
         line-height: 1.7;
         margin-bottom: 35px;
@@ -331,7 +331,7 @@
     overflow: hidden;
     cursor: grab;
     padding: 0;
-    margin: 0 auto 50px auto;
+    margin: 0 auto 40px auto;
     max-width: 100%;
 
     &:active {
@@ -374,7 +374,7 @@
   .gallery-header {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 60px;
+    padding: 0 10px;
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -403,7 +403,7 @@
 
     .gallery-desc {
       font-family: $font-body;
-      font-size: 1.1rem;
+      font-size: 1rem;
       color: $color-blue;
       line-height: 1.7;
       max-width: 550px;
@@ -452,13 +452,13 @@
       font-family: $font-body;
       font-size: 1.8rem;
       color: $color-cream;
-      margin-bottom: -60px;
+      margin-bottom: -80px;
       font-weight: 400;
     }
 
     .book-title {
       font-family: $font-title;
-      font-size: 5.5rem;
+      font-size: 6rem;
       color: $color-cream;
       margin-bottom: 20px;
       line-height: 1;
@@ -480,17 +480,16 @@
       display: inline-block;
       font-family: $font-body;
       font-size: 1rem;
-      color: $color-black;
-      background-color: $color-cream;
+      color: $color-cream;
+      background-color: $color-blue;
       padding: 14px 40px;
       text-decoration: none;
       border-radius: 0;
-      font-weight: 600;
       transition: all 0.3s ease;
       letter-spacing: 0.5px;
 
       &:hover {
-        background-color: $color-blue;
+        background-color: $color-black;
         color: $color-cream;
         transform: translateY(-2px);
         box-shadow: 0 4px 12px rgba(27, 27, 27, 0.201);

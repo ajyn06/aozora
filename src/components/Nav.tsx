@@ -11,17 +11,11 @@ const Nav = () => {
     let lastScroll = 0;
     const handleScroll = () => {
       const currentScroll = window.scrollY;
-      
-      // Show nav when scrolling up, hide when scrolling down
       if (currentScroll > lastScroll && currentScroll > 100) {
-        // Scrolling down
         setShowHeader(false);
       } else if (currentScroll < lastScroll) {
-        // Scrolling up
         setShowHeader(true);
       }
-      
-      // Add dark background when scrolled
       if (currentScroll > 50) {
         setScrolled(true);
       } else {
@@ -34,6 +28,28 @@ const Nav = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    const html = document.documentElement;
+    const prevent = (e: Event) => {
+      e.preventDefault();
+    };
+
+    if (menuOpen) {
+      html.classList.add("no-scroll");
+      document.body.classList.add("no-scroll");
+      document.addEventListener("wheel", prevent, { passive: false });
+      document.addEventListener("touchmove", prevent, { passive: false });
+    } else {
+      html.classList.remove("no-scroll");
+      document.body.classList.remove("no-scroll");
+    }
+
+    return () => {
+      document.removeEventListener("wheel", prevent as EventListener);
+      document.removeEventListener("touchmove", prevent as EventListener);
+    };
+  }, [menuOpen]);
 
   return (
     <header className={`nav-header ${showHeader ? "visible" : "hidden"} ${scrolled ? "scrolled" : ""}`}>

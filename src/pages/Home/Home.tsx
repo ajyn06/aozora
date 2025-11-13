@@ -1,5 +1,5 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Home.scss";
 
@@ -8,6 +8,7 @@ const Home = () => {
   const chefRef = useRef(null);
   const videoRef = useRef<HTMLDivElement>(null);
   const bookRef = useRef<HTMLDivElement>(null);
+  const [showNotification, setShowNotification] = useState(false);
 
   const { scrollYProgress } = useScroll({
     target: videoRef,
@@ -24,6 +25,16 @@ const Home = () => {
   const videoOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.8, 0.3]);
 
   const bookScale = useTransform(bookScrollProgress, [0, 0.5, 1], [1.2, 1, 1.2]);
+
+  const handleContactSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    setShowNotification(true);
+    form.reset();
+    setTimeout(() => {
+      setShowNotification(false);
+    }, 3000);
+  };
 
   const scrollDown = () => {
     if (storyRef.current) {
@@ -674,7 +685,7 @@ const Home = () => {
           >
             Contact Us
           </motion.h2>
-          <form className="contact-form">
+          <form className="contact-form" onSubmit={handleContactSubmit}>
             <motion.div 
               className="form-group"
               initial={{ opacity: 0, y: 20 }}
@@ -743,6 +754,19 @@ const Home = () => {
           <img src="/Home/contact-img.jpg" alt="Sushi with chopsticks" className="contact-image" />
         </motion.div>
       </section>
+
+      {/* Notif Mess */}
+      {showNotification && (
+        <motion.div
+          className="notification-toast"
+          initial={{ opacity: 0, y: 50, x: 50 }}
+          animate={{ opacity: 1, y: 0, x: 0 }}
+          exit={{ opacity: 0, y: 50, x: 50 }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
+        >
+          <p>Thank you! Your message has been sent successfully.</p>
+        </motion.div>
+      )}
     </>
   );
 };

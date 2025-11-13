@@ -741,18 +741,11 @@ const Home = () => {
             </motion.div>
           </form>
         </div>
-        <motion.div 
+        <div 
           className="contact-image-container"
-          initial={{ opacity: 0, scale: 1.05 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ 
-            duration: 1.4,
-            ease: [0.25, 0.1, 0.25, 1],
-          }}
         >
           <img src="/Home/contact-img.jpg" alt="Sushi with chopsticks" className="contact-image" />
-        </motion.div>
+        </div>
       </section>
 
       {/* Notif Mess */}

@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
 import "./Home.scss";
@@ -6,6 +6,24 @@ import "./Home.scss";
 const Home = () => {
   const storyRef = useRef<HTMLDivElement>(null);
   const chefRef = useRef(null);
+  const videoRef = useRef<HTMLDivElement>(null);
+  const bookRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: videoRef,
+    offset: ["start start", "end start"]
+  });
+
+  const { scrollYProgress: bookScrollProgress } = useScroll({
+    target: bookRef,
+    offset: ["start end", "end start"]
+  });
+
+  const videoY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const videoScale = useTransform(scrollYProgress, [0, 1], [1, 1.2]);
+  const videoOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.8, 0.3]);
+
+  const bookScale = useTransform(bookScrollProgress, [0, 0.5, 1], [1.2, 1, 1.2]);
 
   const scrollDown = () => {
     if (storyRef.current) {
@@ -175,7 +193,7 @@ const Home = () => {
 
   return (
     <>
-      <section className="home">
+      <section className="home" ref={videoRef}>
         <motion.video
           className="bg-video"
           src="/Home/1-bg.mp4"
@@ -183,6 +201,11 @@ const Home = () => {
           loop
           muted
           playsInline
+          style={{ 
+            y: videoY,
+            scale: videoScale,
+            opacity: videoOpacity
+          }}
           variants={fadeInVariants}
           initial="hidden"
           animate="visible"
@@ -518,10 +541,23 @@ const Home = () => {
               <motion.div
                 key={index}
                 className="gallery-item"
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.3 }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ 
+                  duration: 0.5,
+                  delay: index * 0.08,
+                  ease: "easeOut",
+                }}
+                whileHover={{ 
+                  y: -10,
+                  transition: { duration: 0.2 }
+                }}
               >
-                <img src={src} alt={`Gallery ${index + 1}`} />
+                <img 
+                  src={src} 
+                  alt={`Gallery ${index + 1}`}
+                />
               </motion.div>
             ))}
           </motion.div>
@@ -547,8 +583,14 @@ const Home = () => {
         </motion.div>
       </section>
 
-      {/* Book/Reserve Section */}
-      <section className="book-section">
+      {/* Book Section */}
+      <section className="book-section" ref={bookRef}>
+        <motion.div 
+          className="book-bg"
+          style={{ 
+            scale: bookScale
+          }}
+        />
         <div className="book-overlay"></div>
         <motion.div 
           className="book-content"
@@ -613,6 +655,92 @@ const Home = () => {
               Book Now
             </Link>
           </motion.div>
+        </motion.div>
+      </section>
+
+      {/* Contact Us Section */}
+      <section className="contact-section">
+        <div className="contact-form-container">
+          <motion.h2 
+            className="contact-title"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ 
+              duration: 0.9,
+              delay: 0.2,
+              ease: [0.25, 0.1, 0.25, 1],
+            }}
+          >
+            Contact Us
+          </motion.h2>
+          <form className="contact-form">
+            <motion.div 
+              className="form-group"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ 
+                duration: 0.8,
+                delay: 0.3,
+                ease: [0.25, 0.1, 0.25, 1],
+              }}
+            >
+              <input type="text" id="name" name="name" placeholder="Name" required />
+            </motion.div>
+            <motion.div 
+              className="form-group"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ 
+                duration: 0.8,
+                delay: 0.4,
+                ease: [0.25, 0.1, 0.25, 1],
+              }}
+            >
+              <input type="email" id="email" name="email" placeholder="Email" required />
+            </motion.div>
+            <motion.div 
+              className="form-group"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ 
+                duration: 0.8,
+                delay: 0.5,
+                ease: [0.25, 0.1, 0.25, 1],
+              }}
+            >
+              <textarea id="message" name="message" rows={4} placeholder="Message" required></textarea>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ 
+                duration: 0.8,
+                delay: 0.6,
+                ease: [0.25, 0.1, 0.25, 1],
+              }}
+            >
+              <button type="submit" className="submit-btn">
+                Submit
+              </button>
+            </motion.div>
+          </form>
+        </div>
+        <motion.div 
+          className="contact-image-container"
+          initial={{ opacity: 0, scale: 1.05 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ 
+            duration: 1.4,
+            ease: [0.25, 0.1, 0.25, 1],
+          }}
+        >
+          <img src="/Home/contact-img.jpg" alt="Sushi with chopsticks" className="contact-image" />
         </motion.div>
       </section>
     </>

@@ -17,13 +17,13 @@
     height: 100%;
     object-fit: cover;
     z-index: 0;
-    filter: brightness(95%);
+    filter: brightness(100%);
   }
   
   .video-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.25);
+    background: rgba(0, 0, 0, 0.423);
     z-index: 1;
   }
 
@@ -351,7 +351,6 @@
         cursor: pointer;
         position: relative;
         overflow: hidden;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 
         img {
           width: 100%;
@@ -360,10 +359,13 @@
           display: block;
           user-select: none;
           pointer-events: none;
+          transition: transform 0.4s ease;
         }
 
         &:hover {
-          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+          img {
+            transform: scale(1.08);
+          }
         }
       }
     }
@@ -410,18 +412,26 @@
   }
 }
 
-// Reserve Section
+// Book Section
 .book-section {
   position: relative;
   width: 100%;
   height: 500px;
-  background-image: url('/Home/reserve.jpg');
-  background-size: cover;
-  background-position: center;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+
+  .book-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/Home/reserve.jpg');
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+  }
 
   .book-overlay {
     position: absolute;
@@ -485,6 +495,112 @@
         transform: translateY(-2px);
         box-shadow: 0 4px 12px rgba(27, 27, 27, 0.201);
       }
+    }
+  }
+}
+
+// Contact Section
+.contact-section {
+  width: 100%;
+  height: 700px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+
+  .contact-form-container {
+    background-color: $color-cream;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 100px 120px 100px;
+    height: 100%;
+
+    .contact-title {
+      font-family: $font-title;
+      font-size: 4.5rem;
+      color: $color-blue;
+      margin-bottom: 80px;
+      line-height: 1;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+
+        input,
+        textarea {
+          font-family: $font-body;
+          font-size: 1rem;
+          color: $color-blue;
+          background-color: transparent;
+          border: none;
+          border-bottom: 2px solid $color-blue;
+          padding: 0 0 10px 0;
+          outline: none;
+          transition: border-color 0.3s ease;
+
+          &:focus {
+            border-bottom-color: darken($color-blue, 15%);
+          }
+
+          &::placeholder {
+            color: rgba($color-blue, 0.4);
+            font-size: 0.85rem;
+          }
+        }
+
+        textarea {
+          resize: none;
+          min-height: 70px;
+          padding-top: 0;
+        }
+      }
+
+      .submit-btn {
+        display: inline-block;
+        font-family: $font-body;
+        font-size: 1rem;
+        color: $color-white;
+        background-color: $color-blue;
+        padding: 18px 50px;
+        text-decoration: none;
+        border: none;
+        border-radius: 0;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        letter-spacing: 0.5px;
+        align-self: flex-start;
+  
+
+        &:hover {
+          background-color: darken($color-blue, 8%);
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+      }
+    }
+  }
+
+  .contact-image-container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+
+    .contact-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 70%;
+      display: block;
     }
   }
 }

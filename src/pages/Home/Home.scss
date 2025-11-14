@@ -82,6 +82,49 @@
   }
 }
 
+// Mobile Responsive - Top Home (≤768px and below)
+@media (max-width: 768px) {
+  .home {
+    height: auto;
+    padding: 140px 0 140px; 
+    align-items: flex-start;
+    .bg-video { filter: brightness(90%); }
+    .home-content {
+      margin-left: 10%;
+      .home-title { font-size: 4.8em; }
+      .home-subtitle { font-size: 1.4rem; margin-bottom: 1rem; }
+      .home-desc { font-size: 0.95rem; line-height: 1.5; }
+    }
+    .scroll-arrow { bottom: 2.5rem; }
+  }
+}
+
+@media (max-width: 600px) {
+  .home {
+    padding: 120px 0 100px;
+    .home-content {
+      margin-left: 9%;
+      .home-title { font-size: 4em; }
+      .home-subtitle { font-size: 1.25rem; }
+      .home-desc { font-size: 0.9rem; max-width: 90%; }
+    }
+    .scroll-arrow { bottom: 2.8rem; span { width: 16px; height: 16px; border-bottom: 3px solid $color-cream; border-right: 3px solid $color-cream; } }
+  }
+}
+
+@media (max-width: 480px) {
+  .home {
+    padding: 150px 0 90px;
+    .home-content {
+      margin-left: 10%;
+      .home-title { font-size: 2.5em; line-height: 0.8; }
+      .home-subtitle { font-size: 1.1rem; margin-top: -2px;}
+      .home-desc { font-size: 0.8rem; }
+    }
+    .scroll-arrow { bottom: 3rem; span { width: 14px; height: 14px; border-bottom: 3px solid $color-cream; border-right: 3px solid $color-cream; } }
+  }
+}
+
 // Our Story & Chef Section
 .about {
   background-color: $color-white;
@@ -236,6 +279,73 @@
   }
 }
 
+// Mobile Responsive - Our Story & Chef (≤768px and below)
+@media (max-width: 768px) {
+  .about {
+    padding: 60px 0 0 0;
+    .about-container { padding: 0 40px; }
+
+    .story-section {
+      grid-template-columns: 1fr;
+      gap: 50px;
+      .story-content {
+        padding-bottom: 60px;
+        .story-title { font-size: 3rem; }
+      }
+      .story-images {
+        grid-template-columns: repeat(4, 1fr);
+        .story-img { aspect-ratio: 1 / 1; }
+      }
+    }
+
+    .chef-section {
+      margin: 0;
+      padding: 100px 0 60px 0;
+      .chef-section-inner { grid-template-columns: 1fr; gap: 40px; padding: 0 40px; }
+      .chef-image-container { max-width: 100%; .chef-img { box-shadow: none;} }
+      .chef-content {
+        padding-top: 20px;
+        .chef-name { font-size: 3.8rem; }
+        .chef-surname { font-size: 1.4rem; }
+      }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .about {
+    .story-section {
+      gap: 40px;
+      .story-content { .story-title { font-size: 2.6rem; } }
+      .story-images { grid-template-columns: repeat(3, 1fr); }
+    }
+    .chef-section {
+      padding: 80px 0 50px 0;
+      .chef-content {
+        .chef-name { font-size: 3.2rem; }
+        .chef-surname { font-size: 1.2rem; }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .about {
+    .about-container { padding: 0 40px; }
+    .story-section {
+      .story-content { .story-title { margin-top: -30px; font-size: 3rem; } .story-text, .story-intro { font-size: 0.8rem; } }
+      .story-images { grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: -60px; }
+    }
+    .chef-section {
+      .chef-content {
+        .chef-name { margin-top: -20px; font-size: 2.7rem; margin-bottom: -10px; }
+        .chef-surname { font-size: 1.05rem; }
+        .chef-intro, .chef-text { font-size: 0.8rem; }
+      }
+    }
+  }
+}
+
 // Menu Section
 .menu-section {
   background-color: $color-white;
@@ -317,6 +427,51 @@
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
       }
+    }
+  }
+}
+
+// Gallery Section
+.menu-section {
+  @media (max-width: 768px) {
+    .menu-container {
+      grid-template-columns: 1fr 1fr; // keep two columns
+      align-items: center;
+    }
+    .menu-container .menu-image { height: 380px; }
+    .menu-container .menu-content {
+      padding: 0 40px;
+      .menu-subtitle { font-size: 1.4rem; margin-bottom: -36px; }
+      .menu-title { font-size: 3.2rem; }
+      .menu-desc { font-size: 0.95rem; max-width: 100%; }
+      .menu-btn { padding: 12px 28px; font-size: 0.95rem; }
+    }
+  }
+
+  @media (max-width: 600px) {
+    .menu-container {
+      grid-template-columns: 1fr 1fr; // still side-by-side
+      gap: 0;
+    }
+    .menu-container .menu-image { height: 320px; }
+    .menu-container .menu-content {
+      padding: 0 28px;
+      .menu-subtitle { font-size: 1rem; margin-bottom: -32px; }
+      .menu-title { font-size: 2.6rem; }
+      .menu-desc { font-size: 0.92rem; }
+      .menu-btn { padding: 11px 24px; font-size: 0.95rem; }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .menu-container { grid-template-columns: 1fr 1fr; }
+    .menu-container .menu-image { height: 260px; }
+    .menu-container .menu-content {
+      padding: 0 20px;
+      .menu-subtitle { font-size: 1rem; margin-bottom: -20px; margin-top: 40px;}
+      .menu-title { font-size: 2.8rem; margin-bottom: -30px; }
+      .menu-desc { font-size: 0.8rem; margin-top: 50px; }
+      .menu-btn { padding: 10px 20px; font-size: 0.8rem; margin-bottom: 40px;}
     }
   }
 }

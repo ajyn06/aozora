@@ -566,6 +566,51 @@
     }
   }
 }
+@media (max-width: 600px) {
+  .gallery-section {
+    padding: 50px 0 70px 0;
+
+    .gallery-scroll {
+      .gallery-track {
+        gap: 12px;
+        .gallery-item { width: 280px; height: auto; aspect-ratio: 1 / 1; }
+      }
+    }
+
+    .gallery-header {
+      gap: 28px;
+      padding: 0 16px;
+      .gallery-title-section {
+        .gallery-subtitle { font-size: 1.1rem; margin-bottom: -32px; }
+        .gallery-title { font-size: 2.8rem; }
+      }
+      .gallery-desc { font-size: 0.92rem; }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery-section {
+    padding: 40px 0 60px 0;
+
+    .gallery-scroll {
+      .gallery-track {
+        gap: 10px;
+        .gallery-item { width: 250px; height: auto; aspect-ratio: 1 / 1; }
+      }
+    }
+
+    .gallery-header {
+      gap: 20px;
+      padding: 0 12px;
+      .gallery-title-section {
+        .gallery-subtitle { font-size: 1rem; margin-bottom: -24px; }
+        .gallery-title { font-size: 2.4rem; }
+      }
+      .gallery-desc { font-size: 0.9rem; }
+    }
+  }
+}
 
 // Book Section
 .book-section {
@@ -653,6 +698,46 @@
   }
 }
 
+// Mobile Responsive - Book Section (≤768px and below)
+@media (max-width: 768px) {
+  .book-section {
+    height: 420px;
+    .book-content { padding: 0 30px; }
+    .book-content {
+      .book-subtitle { font-size: 1.4rem; margin-bottom: -60px; }
+      .book-title { font-size: 4rem; }
+      .book-desc { font-size: 0.95rem; max-width: 90%; }
+      .book-btn { padding: 12px 32px; font-size: 0.95rem; }
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .book-section {
+    height: 360px;
+    .book-content { padding: 0 24px; }
+    .book-content {
+      .book-subtitle { font-size: 1.2rem; margin-bottom: -40px; }
+      .book-title { font-size: 3rem; }
+      .book-desc { font-size: 0.8rem; }
+      .book-btn { padding: 11px 26px; font-size: 0.9rem; }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .book-section {
+    height: 320px;
+    .book-content { padding: 0 16px; }
+    .book-content {
+      .book-subtitle { font-size: 1rem; margin-bottom: -30px; }
+      .book-title { font-size: 2.4rem; }
+      .book-desc { font-size: 0.7rem; margin-bottom: 28px; }
+      .book-btn { padding: 10px 22px; font-size: 0.85rem; }
+    }
+  }
+}
+
 // Contact Section
 .contact-section {
   width: 100%;
@@ -695,7 +780,7 @@
           color: $color-blue;
           background-color: transparent;
           border: none;
-          border-bottom: 2px solid $color-blue;
+          border-bottom: 1px solid $color-blue;
           padding: 0 0 10px 0;
           outline: none;
           transition: border-color 0.3s ease;
@@ -779,5 +864,96 @@
     display: flex;
     align-items: center;
     gap: 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-section {
+    grid-template-columns: 1fr;
+    height: auto;
+    overflow: visible;
+
+    .contact-form-container {
+      padding: 50px 40px 60px 40px;
+
+      .contact-title {
+        font-size: 3rem;
+        margin-bottom: 40px;
+      }
+
+      .contact-form {
+        gap: 28px;
+
+        .form-group {
+          input,
+          textarea {
+            font-size: 1rem;
+          }
+        }
+
+        .submit-btn {
+          padding: 14px 32px;
+          font-size: 0.95rem;
+        }
+      }
+    }
+
+    .contact-image-container {
+      height: 360px; 
+      overflow: hidden;
+      .contact-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        display: block;
+      }
+    }
+  }
+
+  .notification-toast {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    bottom: 16px;
+    max-width: calc(100% - 40px);
+    width: auto;
+    padding: 14px 18px;
+    font-size: 0.95rem;
+    border-radius: 6px;
+  }
+}
+
+@media (max-width: 600px) {
+  .contact-section {
+    .contact-form-container {
+      padding: 40px 28px 50px 28px;
+      .contact-title { font-size: 2.6rem; }
+      .contact-form { gap: 24px; }
+    }
+    .contact-image-container { height: 320px; }
+  }
+  .notification-toast {
+    bottom: 14px;
+    max-width: calc(100% - 32px);
+    padding: 12px 16px;
+    font-size: 0.92rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-section {
+    .contact-form-container {
+      padding: 36px 24px 44px 24px;
+      .contact-title { font-size: 2.2rem; margin-bottom: 28px; }
+      .contact-form { gap: 20px; }
+    }
+    .contact-image-container { height: 260px; }
+  }
+  .notification-toast {
+    bottom: 12px;
+    max-width: calc(100% - 24px);
+    padding: 11px 14px;
+    font-size: 0.9rem;
   }
 }

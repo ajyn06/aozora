@@ -560,10 +560,6 @@ const Home = () => {
                   delay: index * 0.08,
                   ease: "easeOut",
                 }}
-                whileHover={{ 
-                  y: -10,
-                  transition: { duration: 0.2 }
-                }}
               >
                 <img 
                   src={src} 

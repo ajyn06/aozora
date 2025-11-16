@@ -1,4 +1,5 @@
-@import "../../styles/variables";
+@use "../../styles/variables.scss" as *;
+@use "sass:color";
 
 // Top Home 
 .home {
@@ -23,7 +24,7 @@
   .video-overlay {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.423);
+    background: rgba(0, 0, 0, 0.199);
     z-index: 1;
   }
 
@@ -37,8 +38,8 @@
 
     .home-title {
       font-family: $font-title;
-      color: $color-cream-light;
-      font-size: 9.5em;
+      color: $color-cream;
+      font-size: 10rem;
       line-height: 0.7;
       margin-bottom: 0.4rem;
 
@@ -51,7 +52,7 @@
       font-family: $font-body;
       font-size: 2rem;
       margin-bottom: 1.3rem;
-      color: $color-cream-light;
+      color: $color-cream;
       font-weight: 600;
     }
 
@@ -82,7 +83,6 @@
   }
 }
 
-// Mobile Responsive - Top Home (≤768px and below)
 @media (max-width: 768px) {
   .home {
     height: auto;
@@ -138,7 +138,7 @@
 
   .story-section {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 0.85fr 1.15fr;
     gap: 80px;
     margin-bottom: 20px;
     position: relative;
@@ -150,7 +150,7 @@
 
       .story-title {
         font-family: $font-title;
-        font-size: 4rem;
+        font-size: 5rem;
         color: $color-blue;
         margin-bottom: 10px;
       }
@@ -180,6 +180,7 @@
         aspect-ratio: 1 / 1;
         object-fit: cover;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        transition: filter 0.4s ease;
       }
     }
   }
@@ -211,6 +212,7 @@
         height: auto;
         object-fit: cover;
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        transition: filter 0.4s ease;
       }
 
       .chef-quote {
@@ -279,7 +281,26 @@
   }
 }
 
-// Mobile Responsive - Our Story & Chef (≤768px and below)
+@media (hover: hover) {
+  .chef-section {
+    .chef-image-container {
+      .chef-img { filter: grayscale(100%); }
+      &:hover .chef-img { filter: grayscale(0%); }
+    }
+  }
+}
+
+@media (hover: hover) {
+  .about {
+    .story-section {
+      .story-images {
+        .story-img { filter: grayscale(100%); }
+        .story-img:hover { filter: grayscale(0%); }
+      }
+    }
+  }
+}
+
 @media (max-width: 768px) {
   .about {
     padding: 60px 0 0 0;
@@ -384,15 +405,15 @@
 
       .menu-subtitle {
         font-family: $font-body;
-        font-size: 2.2rem;
+        font-size: 2rem;
         color: $color-blue;
-        margin-bottom: -50px;
+        margin-bottom: -80px;
         font-weight: 400;
       }
 
       .menu-title {
         font-family: $font-title;
-        font-size: 5rem;
+        font-size: 7rem;
         color: $color-blue;
         margin-bottom: 25px;
         line-height: 1;
@@ -422,7 +443,7 @@
         letter-spacing: 0.5px;
 
         &:hover {
-          background-color: darken($color-blue, 8%);
+          background-color: color.adjust($color-blue, $lightness: -8%);
           transform: translateY(-2px);
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }
@@ -430,12 +451,10 @@
     }
   }
 }
-
-// Gallery Section
 .menu-section {
   @media (max-width: 768px) {
     .menu-container {
-      grid-template-columns: 1fr 1fr; // keep two columns
+      grid-template-columns: 1fr 1fr; 
       align-items: center;
     }
     .menu-container .menu-image { height: 380px; }
@@ -450,7 +469,7 @@
 
   @media (max-width: 600px) {
     .menu-container {
-      grid-template-columns: 1fr 1fr; // still side-by-side
+      grid-template-columns: 1fr 1fr; 
       gap: 0;
     }
     .menu-container .menu-image { height: 320px; }
@@ -475,6 +494,7 @@
     }
   }
 }
+
 
 // Gallery Section
 .gallery-section {
@@ -540,15 +560,15 @@
 
       .gallery-subtitle {
         font-family: $font-body;
-        font-size: 1.5rem;
+        font-size: 1.2rem;
         color: $color-blue;
-        margin-bottom: -55px;
+        margin-bottom: -60px;
         font-weight: 400;
       }
 
       .gallery-title {
         font-family: $font-title;
-        font-size: 4.8rem;
+        font-size: 5rem;
         color: $color-blue;
         margin-bottom: 0;
         line-height: 1;
@@ -697,8 +717,6 @@
     }
   }
 }
-
-// Mobile Responsive - Book Section (≤768px and below)
 @media (max-width: 768px) {
   .book-section {
     height: 420px;
@@ -786,7 +804,7 @@
           transition: border-color 0.3s ease;
 
           &:focus {
-            border-bottom-color: darken($color-blue, 15%);
+            border-bottom-color: color.adjust($color-blue, $lightness: -15%);
           }
 
           &::placeholder {
@@ -820,7 +838,7 @@
   
 
         &:hover {
-          background-color: darken($color-blue, 8%);
+          background-color: color.adjust($color-blue, $lightness: -8%);
           transform: translateY(-2px);
           box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
         }

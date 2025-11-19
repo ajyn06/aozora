@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useMemo, useRef } from "react";
+import { omakaseItems, formatPrice } from "./menu-data";
 import "./Menu.scss";
 
 const Menu = () => {
@@ -96,6 +97,41 @@ const Menu = () => {
                 Download Menu
               </a>
             </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Omakase Section */}
+      <section className="menu-section omakase-section" aria-labelledby="omakase-heading">
+        <div className="menu-section-inner">
+          <header className="menu-section-header">
+            <h2 id="omakase-heading" className="omakase-title">Omakase Experience</h2>
+            <p className="omakase-subtitle">
+              An intimate multi-course journey curated by our head chef — a
+              celebration of season, sea, and artistry.
+            </p>
+          </header>
+          <div className="omakase-grid" role="list">
+            {omakaseItems.map(item => (
+              <article key={item.id} className="omakase-card" role="listitem">
+                <div className="omakase-image-wrapper">
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="omakase-image"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="omakase-info">
+                  <div className="omakase-top">
+                    <h3 className="omakase-name">{item.name}</h3>
+                    <span className="omakase-price">{formatPrice(item.price)}</span>
+                  </div>
+                  <p className="omakase-desc">{item.description}</p>
+                  <hr className="omakase-divider" />
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </section>

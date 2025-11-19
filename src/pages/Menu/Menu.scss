@@ -108,3 +108,114 @@
 	}
 }
 
+.menu-section {
+	width: 100%;
+	padding: 90px 7% 120px;
+	background-color: $color-blue; 
+	color: $color-cream;
+	display: block;
+}
+
+// Omakase 
+.omakase-section {
+	.menu-section-inner { max-width: 1400px; margin: 0 auto; }
+
+	.menu-section-header {
+		text-align: center;
+		margin-bottom: 64px;
+	}
+
+	.omakase-title {
+		font-family: $font-title;
+		font-size: 3.6rem;
+		line-height: 1.05;
+		margin: 0 0 12px;
+		color: $color-cream;
+	}
+
+	.omakase-subtitle {
+		font-family: $font-body;
+		font-size: 0.92rem;
+		line-height: 1.5;
+		max-width: 640px;
+		margin: 0 auto;
+		color: $color-cream-light;
+	}
+
+	.omakase-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 480px); 
+		row-gap: 68px;
+		column-gap: 60px;
+		justify-content: center; 
+	}
+
+	.omakase-card {
+		display: flex;
+		flex-direction: column;
+		background: transparent;
+		color: $color-cream;
+		width: 500px; 
+	}
+	.omakase-image-wrapper {
+		position: relative;
+		width: 100%;
+		aspect-ratio: 16 / 7; 
+		overflow: hidden;
+		background: #0e1c33;
+	}
+	.omakase-image {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+		filter: brightness(96%);
+		transition: transform 0.6s ease; 
+	}
+	.omakase-card:hover .omakase-image { transform: scale(1.04); }
+
+	.omakase-info { padding-top: 18px; }
+
+	.omakase-top {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-start;
+		gap: 16px;
+		margin-bottom: 10px;
+	}
+
+	.omakase-name {
+		font-family: $font-title;
+		font-size: 1rem;
+		font-weight: 600;
+		margin: 0;
+		letter-spacing: 0.15px;
+	}
+
+	.omakase-price {
+		font-family: $font-title;
+		font-size: 0.9rem;
+		font-weight: 600;
+		white-space: nowrap;
+	}
+
+	.omakase-desc {
+		font-family: $font-body;
+		font-size: 0.8rem;
+		line-height: 1.38;
+		max-width: 420px;
+		margin: 0 0 14px;
+		color: $color-cream-light;
+	}
+
+	.omakase-divider {
+		border: none;
+		height: 1px;
+		background: rgba(247, 241, 222, 0.4);
+		width: 100%;
+		margin: 0;
+	}
+}
+

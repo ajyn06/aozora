@@ -527,3 +527,58 @@
 	}
 }
 
+// Quote Menu Section
+.quote-menu-section {
+	position: relative;
+	width: 100%;
+	height: 60vh;
+	min-height: 400px;
+	max-height: 700px;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.quote-menu-video {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	z-index: 0;
+}
+
+.quote-menu-overlay {
+	position: absolute;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.29);
+	z-index: 1;
+}
+
+.quote-menu-content {
+	position: relative;
+	z-index: 2;
+	text-align: center;
+	color: $color-cream;
+	max-width: 900px;
+	padding: 0 5%;
+}
+
+.quote-menu-text {
+	font-family: $font-title;
+	font-size: 2.8rem;
+	line-height: 1.3;
+	margin: 0 0 10px;
+	font-weight: 400;
+	letter-spacing: 0.5px;
+}
+
+.quote-menu-author {
+	font-family: $font-body;
+	font-size: 1rem;
+	font-style: normal;
+	color: $color-cream-light;
+	display: block;
+}
+

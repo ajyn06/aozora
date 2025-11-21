@@ -243,6 +243,20 @@ const Menu = () => {
           </div>
         </div>
       </section>
+
+      {/* Quote Menu Section */}
+      <section className="quote-menu-section">
+        <video className="quote-menu-video" autoPlay loop muted playsInline>
+          <source src="/Menu/quote-menu.mp4" type="video/mp4" />
+        </video>
+        <div className="quote-menu-overlay" />
+        <div className="quote-menu-content">
+          <blockquote className="quote-menu-text">
+            The beauty of sushi is found not in perfection, but in presence.
+          </blockquote>
+          <cite className="quote-menu-author">— Chef Haruto Sakamoto</cite>
+        </div>
+      </section>
     </>
   );
 };

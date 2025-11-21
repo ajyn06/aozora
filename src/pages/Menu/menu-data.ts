@@ -111,4 +111,47 @@ export const sushiItems: MenuItem[] = [
   },
 ];
 
+export const hotDishItems: MenuItem[] = [
+  {
+    id: 'hotdish-miso-soup',
+    category: 'hot-dish',
+    name: 'Miso Soup with Tofu & Wakame',
+    price: 100,
+    description: 'A comforting broth of dashi and miso with silky tofu and seaweed.',
+    image: 'Menu/addons-1.jpg',
+  },
+  {
+    id: 'hotdish-agedashi-tofu',
+    category: 'hot-dish',
+    name: 'Agedashi Tofu',
+    price: 250,
+    description: 'Crispy fried tofu in light dashi broth, topped with grated radish and bonito flakes.',
+    image: 'Menu/addons-2.jpg',
+  },
+  {
+    id: 'hotdish-wagyu-tataki',
+    category: 'hot-dish',
+    name: 'Wagyu Tataki',
+    price: 400,
+    description: 'Lightly seared wagyu beef slices with ponzu sauce and garlic chips.',
+    image: 'Menu/addons-3.jpg',
+  },
+  {
+    id: 'hotdish-gindara-saikyo',
+    category: 'hot-dish',
+    name: 'Gindara Saikyo Yaki',
+    price: 450,
+    description: 'Grilled black cod marinated in sweet miso — buttery and delicate.',
+    image: 'Menu/addons-4.jpg',
+  },
+  {
+    id: 'hotdish-tori-karaage',
+    category: 'hot-dish',
+    name: 'Tori Karaage',
+    price: 200,
+    description: 'Japanese-style fried chicken with citrus mayo — crisp and juicy perfection.',
+    image: 'Menu/addons-5.jpg',
+  },
+];
+
 export const formatPrice = (value: number) => `₱${value.toLocaleString('en-PH')}`;

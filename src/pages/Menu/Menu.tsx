@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useMemo, useRef } from "react";
-import { omakaseItems, sushiItems, formatPrice } from "./menu-data";
+import { omakaseItems, sushiItems, hotDishItems, formatPrice } from "./menu-data";
 import "./Menu.scss";
 
 const Menu = () => {
@@ -161,6 +161,40 @@ const Menu = () => {
                   </div>
                   <p className="sushi-desc">{item.description}</p>
                   <hr className="sushi-divider" />
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Hot Dishes & Add-ons Section */}
+      <section className="menu-main-section hotdish-section" aria-labelledby="hotdish-heading">
+        <div className="menu-main-section-inner">
+          <header className="menu-main-section-header">
+            <h2 id="hotdish-heading" className="hotdish-title">Hot Dishes & Add-ons</h2>
+            <p className="hotdish-subtitle">
+              Elegant warm dishes that complement your sushi experience.
+            </p>
+          </header>
+          <div className="hotdish-grid" role="list">
+            {hotDishItems.map(item => (
+              <article key={item.id} className="hotdish-card" role="listitem">
+                <div className="hotdish-image-wrapper">
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="hotdish-image"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="hotdish-info">
+                  <div className="hotdish-top">
+                    <h3 className="hotdish-name">{item.name}</h3>
+                    <span className="hotdish-price">{formatPrice(item.price)}</span>
+                  </div>
+                  <p className="hotdish-desc">{item.description}</p>
+                  <hr className="hotdish-divider" />
                 </div>
               </article>
             ))}

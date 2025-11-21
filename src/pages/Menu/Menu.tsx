@@ -1,10 +1,22 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { useMemo, useRef } from "react";
 import { omakaseItems, sushiItems, hotDishItems, drinkItems, dessertItems, formatPrice } from "./menu-data";
 import "./Menu.scss";
 
 const Menu = () => {
   const heroRef = useRef<HTMLDivElement>(null);
+  const omakaseRef = useRef<HTMLDivElement>(null);
+  const sushiRef = useRef<HTMLDivElement>(null);
+  const hotdishRef = useRef<HTMLDivElement>(null);
+  const drinksRef = useRef<HTMLDivElement>(null);
+  const quoteRef = useRef<HTMLDivElement>(null);
+
+  const omakaseInView = useInView(omakaseRef, { once: true, amount: 0.2 });
+  const sushiInView = useInView(sushiRef, { once: true, amount: 0.2 });
+  const hotdishInView = useInView(hotdishRef, { once: true, amount: 0.2 });
+  const drinksInView = useInView(drinksRef, { once: true, amount: 0.2 });
+  const quoteInView = useInView(quoteRef, { once: true, amount: 0.3 });
+
   const { scrollYProgress } = useScroll({
     target: heroRef,
     offset: ["start start", "end start"],
@@ -39,6 +51,44 @@ const Menu = () => {
       opacity: 1,
       y: 0,
       transition: { duration: 0.9, ease: [0.25, 0.1, 0.25, 1] as const },
+    },
+  } as const;
+
+  const sectionFadeIn = {
+    hidden: { opacity: 0, y: 40 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.8, ease: [0.25, 0.1, 0.25, 1] as const },
+    },
+  } as const;
+
+  const cardStagger = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+      },
+    },
+  } as const;
+
+  const cardFadeIn = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] as const },
+    },
+  } as const;
+
+  const quoteFadeIn = {
+    hidden: { opacity: 0, scale: 0.95 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 1, ease: [0.25, 0.1, 0.25, 1] as const },
     },
   } as const;
 
@@ -100,18 +150,38 @@ const Menu = () => {
       </section>
 
       {/* Omakase Section */}
-      <section className="menu-main-section omakase-section" aria-labelledby="omakase-heading">
+      <section 
+        ref={omakaseRef}
+        className="menu-main-section omakase-section" 
+        aria-labelledby="omakase-heading"
+      >
         <div className="menu-main-section-inner">
-          <header className="menu-main-section-header">
+          <motion.header 
+            className="menu-main-section-header"
+            initial="hidden"
+            animate={omakaseInView ? "visible" : "hidden"}
+            variants={sectionFadeIn}
+          >
             <h2 id="omakase-heading" className="omakase-title">Omakase Experience</h2>
             <p className="omakase-subtitle">
               An intimate multi-course journey curated by our head chef — a
               celebration of season, sea, and artistry.
             </p>
-          </header>
-          <div className="omakase-grid" role="list">
+          </motion.header>
+          <motion.div 
+            className="omakase-grid" 
+            role="list"
+            initial="hidden"
+            animate={omakaseInView ? "visible" : "hidden"}
+            variants={cardStagger}
+          >
             {omakaseItems.map(item => (
-              <article key={item.id} className="omakase-card" role="listitem">
+              <motion.article 
+                key={item.id} 
+                className="omakase-card" 
+                role="listitem"
+                variants={cardFadeIn}
+              >
                 <div className="omakase-image-wrapper">
                   <img
                     src={item.image}
@@ -128,24 +198,44 @@ const Menu = () => {
                   <p className="omakase-desc">{item.description}</p>
                   <hr className="omakase-divider" />
                 </div>
-              </article>
+              </motion.article>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Sushi & Sashimi Section */}
-      <section className="menu-main-section sushi-section" aria-labelledby="sushi-heading">
+      <section 
+        ref={sushiRef}
+        className="menu-main-section sushi-section" 
+        aria-labelledby="sushi-heading"
+      >
         <div className="menu-main-section-inner">
-          <header className="menu-main-section-header">
+          <motion.header 
+            className="menu-main-section-header"
+            initial="hidden"
+            animate={sushiInView ? "visible" : "hidden"}
+            variants={sectionFadeIn}
+          >
             <h2 id="sushi-heading" className="sushi-title">Sushi & Sashimi Selection</h2>
             <p className="sushi-subtitle">
               Authentic creations celebrating the sea's finest treasures.
             </p>
-          </header>
-          <div className="sushi-grid" role="list">
+          </motion.header>
+          <motion.div 
+            className="sushi-grid" 
+            role="list"
+            initial="hidden"
+            animate={sushiInView ? "visible" : "hidden"}
+            variants={cardStagger}
+          >
             {sushiItems.map(item => (
-              <article key={item.id} className="sushi-card" role="listitem">
+              <motion.article 
+                key={item.id} 
+                className="sushi-card" 
+                role="listitem"
+                variants={cardFadeIn}
+              >
                 <div className="sushi-image-wrapper">
                   <img
                     src={item.image}
@@ -162,24 +252,44 @@ const Menu = () => {
                   <p className="sushi-desc">{item.description}</p>
                   <hr className="sushi-divider" />
                 </div>
-              </article>
+              </motion.article>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Hot Dishes & Add-ons Section */}
-      <section className="menu-main-section hotdish-section" aria-labelledby="hotdish-heading">
+      <section 
+        ref={hotdishRef}
+        className="menu-main-section hotdish-section" 
+        aria-labelledby="hotdish-heading"
+      >
         <div className="menu-main-section-inner">
-          <header className="menu-main-section-header">
+          <motion.header 
+            className="menu-main-section-header"
+            initial="hidden"
+            animate={hotdishInView ? "visible" : "hidden"}
+            variants={sectionFadeIn}
+          >
             <h2 id="hotdish-heading" className="hotdish-title">Hot Dishes & Add-ons</h2>
             <p className="hotdish-subtitle">
               Elegant warm dishes that complement your sushi experience.
             </p>
-          </header>
-          <div className="hotdish-grid" role="list">
+          </motion.header>
+          <motion.div 
+            className="hotdish-grid" 
+            role="list"
+            initial="hidden"
+            animate={hotdishInView ? "visible" : "hidden"}
+            variants={cardStagger}
+          >
             {hotDishItems.map(item => (
-              <article key={item.id} className="hotdish-card" role="listitem">
+              <motion.article 
+                key={item.id} 
+                className="hotdish-card" 
+                role="listitem"
+                variants={cardFadeIn}
+              >
                 <div className="hotdish-image-wrapper">
                   <img
                     src={item.image}
@@ -196,17 +306,26 @@ const Menu = () => {
                   <p className="hotdish-desc">{item.description}</p>
                   <hr className="hotdish-divider" />
                 </div>
-              </article>
+              </motion.article>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Drinks & Desserts Section */}
-      <section className="menu-main-section drinks-section" aria-labelledby="drinks-heading">
+      <section 
+        ref={drinksRef}
+        className="menu-main-section drinks-section" 
+        aria-labelledby="drinks-heading"
+      >
         <div className="menu-main-section-inner">
-          <div className="drinks-columns">
-            <div className="drinks-column">
+          <motion.div 
+            className="drinks-columns"
+            initial="hidden"
+            animate={drinksInView ? "visible" : "hidden"}
+            variants={cardStagger}
+          >
+            <motion.div className="drinks-column" variants={cardFadeIn}>
               <header className="drinks-header">
                 <h2 id="drinks-heading" className="drinks-title">Drinks & Beverages</h2>
               </header>
@@ -222,8 +341,8 @@ const Menu = () => {
                   </article>
                 ))}
               </div>
-            </div>
-            <div className="drinks-column">
+            </motion.div>
+            <motion.div className="drinks-column" variants={cardFadeIn}>
               <header className="drinks-header">
                 <h2 className="drinks-title">Desserts</h2>
               </header>
@@ -239,23 +358,31 @@ const Menu = () => {
                   </article>
                 ))}
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
       {/* Quote Menu Section */}
-      <section className="quote-menu-section">
+      <section 
+        ref={quoteRef}
+        className="quote-menu-section"
+      >
         <video className="quote-menu-video" autoPlay loop muted playsInline>
           <source src="/Menu/quote-menu.mp4" type="video/mp4" />
         </video>
         <div className="quote-menu-overlay" />
-        <div className="quote-menu-content">
+        <motion.div 
+          className="quote-menu-content"
+          initial="hidden"
+          animate={quoteInView ? "visible" : "hidden"}
+          variants={quoteFadeIn}
+        >
           <blockquote className="quote-menu-text">
             The beauty of sushi is found not in perfection, but in presence.
           </blockquote>
           <cite className="quote-menu-author">— Chef Haruto Sakamoto</cite>
-        </div>
+        </motion.div>
       </section>
     </>
   );

@@ -40,28 +40,25 @@
 	.menu-hero-content {
 		position: absolute;
 		left: 3%;
-		right: 1%;
+		right: 3%;
 		bottom: 48px;
 		z-index: 2;
 		color: $color-cream;
 		max-width: 1700px;
 		text-align: left;
-		width: 100%;
+		width: auto;
+	}
 
-		.menu-hero-row {
-			display: flex;
-			justify-content: space-between;
-			align-items: flex-end; 
-			gap: 40px;
-		}
+	.menu-hero-bottom {
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-end;
+		gap: 60px;
+		margin-top: 0.6rem;
+	}
 
-		.menu-hero-left { flex: 1 1 auto; min-width: 0; }
-		.menu-hero-right {
-			flex: 0 0 auto;
-			position: absolute;
-			right: calc(-7% + 12px); 
-			bottom: 28px; 
-		}
+	.menu-hero-button {
+		flex-shrink: 0;
 	}
 
 	.menu-hero-title {
@@ -108,7 +105,7 @@
 	}
 }
 
-.menu-section {
+.menu-main-section {
 	width: 100%;
 	padding: 90px 7% 120px;
 	background-color: $color-blue; 
@@ -118,9 +115,9 @@
 
 // Omakase 
 .omakase-section {
-	.menu-section-inner { max-width: 1400px; margin: 0 auto; }
+	.menu-main-section-inner { max-width: 1400px; margin: 0 auto; }
 
-	.menu-section-header {
+	.menu-main-section-header {
 		text-align: center;
 		margin-bottom: 64px;
 	}

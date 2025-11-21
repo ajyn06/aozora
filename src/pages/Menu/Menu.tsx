@@ -44,7 +44,7 @@ const Menu = () => {
 
   return (
     <>
-      {/* Top: Menu Hero */}
+      {/* Menu Hero */}
       <section className="menu-hero" ref={heroRef}>
         <motion.div
           className="menu-hero-bg"
@@ -53,36 +53,34 @@ const Menu = () => {
         <div className="menu-hero-overlay" />
 
         <div className="menu-hero-content">
-          <div className="menu-hero-row">
-            <div className="menu-hero-left">
-              <motion.h1
-                className="menu-hero-title"
-                variants={containerVariants}
-                initial="hidden"
-                animate="visible"
-              >
-                {letters.map((ch, i) => (
-                  <motion.span key={i} className="letter" variants={letterVariants}>
-                    {ch === " " ? "\u00A0" : ch}
-                  </motion.span>
-                ))}
-              </motion.h1>
+          <motion.h1
+            className="menu-hero-title"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            {letters.map((ch, i) => (
+              <motion.span key={i} className="letter" variants={letterVariants}>
+                {ch === " " ? "\u00A0" : ch}
+              </motion.span>
+            ))}
+          </motion.h1>
 
-              <motion.p
-                className="menu-hero-desc"
-                variants={fadeInUp}
-                initial="hidden"
-                animate="visible"
-                transition={{ delay: 0.6 }}
-              >
-                Discover a refined selection of handcrafted sushi, seasonal dishes, and
-                omakase experiences. Every plate at Aozora is a harmony of flavor,
-                balance, and artistry — celebrating the beauty of the sea beneath the
-                endless blue sky.
-              </motion.p>
-            </div>
+          <div className="menu-hero-bottom">
+            <motion.p
+              className="menu-hero-desc"
+              variants={fadeInUp}
+              initial="hidden"
+              animate="visible"
+              transition={{ delay: 0.6 }}
+            >
+              Discover a refined selection of handcrafted sushi, seasonal dishes, and
+              omakase experiences. Every plate at Aozora is a harmony of flavor,
+              balance, and artistry — celebrating the beauty of the sea beneath the
+              endless blue sky.
+            </motion.p>
             <motion.div
-              className="menu-hero-right"
+              className="menu-hero-button"
               variants={fadeInUp}
               initial="hidden"
               animate="visible"
@@ -102,9 +100,9 @@ const Menu = () => {
       </section>
 
       {/* Omakase Section */}
-      <section className="menu-section omakase-section" aria-labelledby="omakase-heading">
-        <div className="menu-section-inner">
-          <header className="menu-section-header">
+      <section className="menu-main-section omakase-section" aria-labelledby="omakase-heading">
+        <div className="menu-main-section-inner">
+          <header className="menu-main-section-header">
             <h2 id="omakase-heading" className="omakase-title">Omakase Experience</h2>
             <p className="omakase-subtitle">
               An intimate multi-course journey curated by our head chef — a

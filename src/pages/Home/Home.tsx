@@ -24,7 +24,7 @@ const Home = () => {
   const videoScale = useTransform(scrollYProgress, [0, 1], [1, 1.2]);
   const videoOpacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.8, 0.3]);
 
-  const bookScale = useTransform(bookScrollProgress, [0, 0.5, 1], [1.2, 1, 1.2]);
+  const bookParallaxY = useTransform(bookScrollProgress, [0, 1], ["-15%", "15%"]); // subtle parallax shift
 
   const handleContactSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -595,7 +595,7 @@ const Home = () => {
         <motion.div 
           className="book-bg"
           style={{ 
-            scale: bookScale
+            y: bookParallaxY
           }}
         />
         <div className="book-overlay"></div>

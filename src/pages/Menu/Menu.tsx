@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useMemo, useRef } from "react";
-import { omakaseItems, sushiItems, hotDishItems, formatPrice } from "./menu-data";
+import { omakaseItems, sushiItems, hotDishItems, drinkItems, dessertItems, formatPrice } from "./menu-data";
 import "./Menu.scss";
 
 const Menu = () => {
@@ -198,6 +198,48 @@ const Menu = () => {
                 </div>
               </article>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Drinks & Desserts Section */}
+      <section className="menu-main-section drinks-section" aria-labelledby="drinks-heading">
+        <div className="menu-main-section-inner">
+          <div className="drinks-columns">
+            <div className="drinks-column">
+              <header className="drinks-header">
+                <h2 id="drinks-heading" className="drinks-title">Drinks & Beverages</h2>
+              </header>
+              <div className="drinks-list" role="list">
+                {drinkItems.map(item => (
+                  <article key={item.id} className="drinks-item" role="listitem">
+                    <div className="drinks-item-top">
+                      <h3 className="drinks-item-name">{item.name}</h3>
+                      <span className="drinks-item-price">{formatPrice(item.price)}</span>
+                    </div>
+                    <p className="drinks-item-desc">{item.description}</p>
+                    <hr className="drinks-divider" />
+                  </article>
+                ))}
+              </div>
+            </div>
+            <div className="drinks-column">
+              <header className="drinks-header">
+                <h2 className="drinks-title">Desserts</h2>
+              </header>
+              <div className="drinks-list" role="list">
+                {dessertItems.map(item => (
+                  <article key={item.id} className="drinks-item" role="listitem">
+                    <div className="drinks-item-top">
+                      <h3 className="drinks-item-name">{item.name}</h3>
+                      <span className="drinks-item-price">{formatPrice(item.price)}</span>
+                    </div>
+                    <p className="drinks-item-desc">{item.description}</p>
+                    <hr className="drinks-divider" />
+                  </article>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>

@@ -154,4 +154,90 @@ export const hotDishItems: MenuItem[] = [
   },
 ];
 
+export const drinkItems: MenuItem[] = [
+  {
+    id: 'drink-matcha-latte',
+    category: 'drinksdessert',
+    name: 'Matcha Iced Latte',
+    price: 200,
+    description: 'Creamy matcha with a perfect balance of sweetness and nuttiness.',
+    image: '',
+  },
+  {
+    id: 'drink-yuzu-soda',
+    category: 'drinksdessert',
+    name: 'Yuzu Sparkling Soda',
+    price: 90,
+    description: 'Refreshing citrus fizz with Japanese yuzu and mint.',
+    image: '',
+  },
+  {
+    id: 'drink-green-tea',
+    category: 'drinksdessert',
+    name: 'Hot Green Tea (Sencha)',
+    price: 250,
+    description: 'Traditional loose-leaf green tea served in a ceramic pot.',
+    image: '',
+  },
+  {
+    id: 'drink-asahi-beer',
+    category: 'drinksdessert',
+    name: 'Asahi Draft Beer',
+    price: 170,
+    description: 'Crisp and refreshing — the perfect pairing for sushi.',
+    image: '',
+  },
+  {
+    id: 'drink-sake',
+    category: 'drinksdessert',
+    name: 'Dassai 45 Junmai Daiginjo (Sake Glass)',
+    price: 90,
+    description: 'Premium sake with floral aroma and smooth finish.',
+    image: '',
+  },
+];
+
+export const dessertItems: MenuItem[] = [
+  {
+    id: 'dessert-matcha-cheesecake',
+    category: 'drinksdessert',
+    name: 'Matcha Cheesecake',
+    price: 250,
+    description: 'Creamy, rich cheesecake infused with premium Uji matcha.',
+    image: '',
+  },
+  {
+    id: 'dessert-sesame-ice-cream',
+    category: 'drinksdessert',
+    name: 'Black Sesame Ice Cream',
+    price: 100,
+    description: 'Smooth and nutty with roasted sesame flavor — a Japanese classic.',
+    image: '',
+  },
+  {
+    id: 'dessert-yuzu-sorbet',
+    category: 'drinksdessert',
+    name: 'Yuzu Sorbet',
+    price: 200,
+    description: 'Light, tangy, and refreshing — the perfect palate cleanser.',
+    image: '',
+  },
+  {
+    id: 'dessert-mochi-trio',
+    category: 'drinksdessert',
+    name: 'Mochi Trio',
+    price: 250,
+    description: 'Soft rice cakes filled with matcha, red bean, and mango cream.',
+    image: '',
+  },
+  {
+    id: 'dessert-hojicha-pudding',
+    category: 'drinksdessert',
+    name: 'Hojicha Pudding',
+    price: 180,
+    description: 'Roasted green tea custard with caramel glaze — subtly sweet and aromatic.',
+    image: '',
+  },
+];
+
 export const formatPrice = (value: number) => `₱${value.toLocaleString('en-PH')}`;

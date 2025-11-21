@@ -210,7 +210,7 @@
 	.omakase-divider {
 		border: none;
 		height: 1px;
-		background: $color-cream-light;
+		background: rgba(247, 241, 222, 0.4);
 		width: 100%;
 		margin: 0;
 	}
@@ -317,7 +317,7 @@
 	.sushi-divider {
 		border: none;
 		height: 1px;
-		background: $color-cream-light;
+		background: rgba(247, 241, 222, 0.4);
 		width: 100%;
 		margin: 0;
 	}
@@ -435,7 +435,93 @@
 	.hotdish-divider {
 		border: none;
 		height: 1px;
-		background: $color-cream-light;
+		background: rgba(247, 241, 222, 0.4);
+		width: 100%;
+		margin: 0;
+	}
+}
+
+// Drinks & Desserts
+.drinks-section {
+	background-color: $color-blue;
+
+	.menu-main-section-inner { 
+		max-width: 1400px; 
+		margin: 0 auto; 
+	}
+
+	.drinks-columns {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		column-gap: 80px;
+	}
+
+	.drinks-column {
+		display: flex;
+		flex-direction: column;
+	}
+
+	.drinks-header {
+		margin-bottom: 48px;
+	}
+
+	.drinks-title {
+		font-family: $font-title;
+		font-size: 2.8rem;
+		line-height: 1.1;
+		margin: 0;
+		color: $color-cream;
+	}
+
+	.drinks-list {
+		display: flex;
+		flex-direction: column;
+		gap: 32px;
+	}
+
+	.drinks-item {
+		display: flex;
+		flex-direction: column;
+		color: $color-cream;
+	}
+
+	.drinks-item-top {
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+		gap: 16px;
+		margin-bottom: 8px;
+	}
+
+	.drinks-item-name {
+		font-family: $font-title;
+		font-size: 0.95rem;
+		font-weight: 600;
+		margin: 0;
+		letter-spacing: 0.15px;
+		line-height: 1.3;
+	}
+
+	.drinks-item-price {
+		font-family: $font-title;
+		font-size: 0.9rem;
+		font-weight: 600;
+		white-space: nowrap;
+		flex-shrink: 0;
+	}
+
+	.drinks-item-desc {
+		font-family: $font-body;
+		font-size: 0.78rem;
+		line-height: 1.4;
+		margin: 0 0 12px;
+		color: $color-cream-light;
+	}
+
+	.drinks-divider {
+		border: none;
+		height: 1px;
+		background: rgba(247, 241, 222, 0.4);
 		width: 100%;
 		margin: 0;
 	}

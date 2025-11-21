@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useMemo, useRef } from "react";
-import { omakaseItems, formatPrice } from "./menu-data";
+import { omakaseItems, sushiItems, formatPrice } from "./menu-data";
 import "./Menu.scss";
 
 const Menu = () => {
@@ -127,6 +127,40 @@ const Menu = () => {
                   </div>
                   <p className="omakase-desc">{item.description}</p>
                   <hr className="omakase-divider" />
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Sushi & Sashimi Section */}
+      <section className="menu-main-section sushi-section" aria-labelledby="sushi-heading">
+        <div className="menu-main-section-inner">
+          <header className="menu-main-section-header">
+            <h2 id="sushi-heading" className="sushi-title">Sushi & Sashimi Selection</h2>
+            <p className="sushi-subtitle">
+              Authentic creations celebrating the sea's finest treasures.
+            </p>
+          </header>
+          <div className="sushi-grid" role="list">
+            {sushiItems.map(item => (
+              <article key={item.id} className="sushi-card" role="listitem">
+                <div className="sushi-image-wrapper">
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="sushi-image"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="sushi-info">
+                  <div className="sushi-top">
+                    <h3 className="sushi-name">{item.name}</h3>
+                    <span className="sushi-price">{formatPrice(item.price)}</span>
+                  </div>
+                  <p className="sushi-desc">{item.description}</p>
+                  <hr className="sushi-divider" />
                 </div>
               </article>
             ))}

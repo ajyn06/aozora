@@ -11,7 +11,18 @@
 	overflow: hidden;
 	display: flex;
 	align-items: center;
+	background-color: $color-blue; 
 
+	&::after {
+		content: "";
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: -1px; 
+		height: 140px;
+		pointer-events: none;
+		z-index: 2;
+	}
 	.menu-hero-bg {
 		position: absolute;
 		inset: 0;
@@ -24,7 +35,6 @@
 		z-index: 0;
 		filter: brightness(88%);
 	}
-
 	.menu-hero-overlay {
 		position: absolute;
 		inset: 0;
@@ -36,7 +46,6 @@
 		);
 		z-index: 1;
 	}
-
 	.menu-hero-content {
 		position: absolute;
 		left: 3%;
@@ -48,7 +57,6 @@
 		text-align: left;
 		width: auto;
 	}
-
 	.menu-hero-bottom {
 		display: flex;
 		justify-content: space-between;
@@ -56,11 +64,9 @@
 		gap: 60px;
 		margin-top: 0.6rem;
 	}
-
 	.menu-hero-button {
 		flex-shrink: 0;
 	}
-
 	.menu-hero-title {
 		font-family: $font-title;
 		color: $color-cream;
@@ -68,10 +74,8 @@
 		line-height: 0.9;
 		margin-bottom: 0.6rem;
 		text-shadow: 0 6px 30px rgba(0, 0, 0, 0.55);
-
 		.letter { display: inline-block; }
 	}
-
 	.menu-hero-desc {
 		font-family: $font-body;
 		font-size: 1rem;
@@ -81,7 +85,6 @@
 		margin-bottom: 20px;
 		text-shadow: 0 2px 14px rgba(0, 0, 0, 0.6);
 	}
-
 	.menu-download-btn {
 		display: inline-block;
 		font-family: $font-body;
@@ -104,24 +107,72 @@
 		}
 	}
 }
-
 .menu-main-section {
 	width: 100%;
 	padding: 90px 7% 120px;
 	background-color: $color-blue; 
 	color: $color-cream;
 	display: block;
+	margin-top: -1px; 
+}
+
+@media (max-width: 900px) {
+	.menu-hero {
+		height: 58vh;
+		min-height: 480px;
+		.menu-hero-content { bottom: 40px; }
+		.menu-hero-title { font-size: 4.4rem; }
+		.menu-hero-desc { font-size: 0.9rem; line-height: 1.55; }
+		.menu-hero-bottom {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 28px;
+		}
+		.menu-download-btn { padding: 12px 28px; font-size: 0.92rem; }
+	}
+}
+@media (max-width: 600px) {
+	.menu-hero {
+		height: 64vh;
+		min-height: 420px;
+		.menu-hero-content {
+			left: 6%;
+			right: 6%;
+			bottom: 80px;
+		}
+		.menu-hero-title {
+			font-size: 3.2rem;
+			line-height: 1.02;
+			margin-bottom: 0.5rem;
+		}
+		.menu-hero-desc {
+			font-size: 0.78rem;
+			line-height: 1.5;
+			max-width: 100%;
+			margin-bottom: 1px;
+		}
+		.menu-download-btn {
+			width: 100%;
+			text-align: center;
+			padding: 12px 20px;
+		}
+	}
+}
+@media (max-height: 580px) {
+	.menu-hero {
+		height: 72vh;
+		.menu-hero-title { font-size: 3.6rem; }
+		.menu-hero-desc { font-size: 0.72rem; }
+	}
 }
 
 // Omakase 
 .omakase-section {
 	.menu-main-section-inner { max-width: 1400px; margin: 0 auto; }
-
 	.menu-main-section-header {
 		text-align: center;
 		margin-bottom: 64px;
 	}
-
 	.omakase-title {
 		font-family: $font-title;
 		font-size: 3.6rem;
@@ -129,7 +180,6 @@
 		margin: 0 0 12px;
 		color: $color-cream;
 	}
-
 	.omakase-subtitle {
 		font-family: $font-body;
 		font-size: 0.92rem;
@@ -138,7 +188,6 @@
 		margin: 0 auto;
 		color: $color-cream-light;
 	}
-
 	.omakase-grid {
 		display: grid;
 		grid-template-columns: repeat(2, 480px); 
@@ -146,7 +195,6 @@
 		column-gap: 60px;
 		justify-content: center; 
 	}
-
 	.omakase-card {
 		display: flex;
 		flex-direction: column;
@@ -172,9 +220,7 @@
 		transition: transform 0.6s ease; 
 	}
 	.omakase-card:hover .omakase-image { transform: scale(1.04); }
-
 	.omakase-info { padding-top: 18px; }
-
 	.omakase-top {
 		display: flex;
 		justify-content: space-between;
@@ -182,7 +228,6 @@
 		gap: 16px;
 		margin-bottom: 10px;
 	}
-
 	.omakase-name {
 		font-family: $font-title;
 		font-size: 1rem;
@@ -190,14 +235,12 @@
 		margin: 0;
 		letter-spacing: 0.15px;
 	}
-
 	.omakase-price {
 		font-family: $font-title;
 		font-size: 0.9rem;
 		font-weight: 600;
 		white-space: nowrap;
 	}
-
 	.omakase-desc {
 		font-family: $font-body;
 		font-size: 0.8rem;
@@ -206,7 +249,6 @@
 		margin: 0 0 14px;
 		color: $color-cream-light;
 	}
-
 	.omakase-divider {
 		border: none;
 		height: 1px;
@@ -215,18 +257,53 @@
 		margin: 0;
 	}
 }
-
+@media (max-width: 1400px) {
+	.omakase-section {
+		.omakase-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			column-gap: 52px;
+			row-gap: 64px;
+		}
+		.omakase-card { width: 100%; }
+		.omakase-desc { max-width: 100%; }
+	}
+}
+@media (max-width: 1000px) {
+	.omakase-section {
+		.omakase-title { font-size: 3.2rem; }
+		.omakase-grid { column-gap: 44px; row-gap: 56px; }
+		.omakase-image-wrapper { aspect-ratio: 16 / 8; }
+	}
+}
+@media (max-width: 560px) {
+	.omakase-section {
+		.omakase-title { font-size: 2.3rem; }
+		.omakase-subtitle { font-size: 0.8rem; }
+		.omakase-grid { column-gap: 20px; row-gap: 38px; }
+		.omakase-image-wrapper { aspect-ratio: 1 / 1; }
+		.omakase-name { font-size: 0.85rem; }
+		.omakase-price { font-size: 0.78rem; }
+		.omakase-desc { font-size: 0.7rem; line-height: 1.34; }
+		.omakase-top { gap: 10px; }
+	}
+}
+@media (max-width: 400px) {
+	.omakase-section {
+		.omakase-title { font-size: 2rem; }
+		.omakase-grid { column-gap: 16px; row-gap: 34px; }
+		.omakase-name { font-size: 0.78rem; }
+		.omakase-price { font-size: 0.72rem; }
+		.omakase-desc { font-size: 0.66rem; }
+	}
+}
 // Sushi & Sashimi
 .sushi-section {
 	background-color: $color-blue;
-
 	.menu-main-section-inner { max-width: 1400px; margin: 0 auto; }
-
 	.menu-main-section-header {
 		text-align: center;
 		margin-bottom: 64px;
 	}
-
 	.sushi-title {
 		font-family: $font-title;
 		font-size: 3.6rem;
@@ -234,7 +311,6 @@
 		margin: 0 0 12px;
 		color: $color-cream;
 	}
-
 	.sushi-subtitle {
 		font-family: $font-body;
 		font-size: 0.92rem;
@@ -243,7 +319,6 @@
 		margin: 0 auto;
 		color: $color-cream-light;
 	}
-
 	.sushi-grid {
 		display: grid;
 		grid-template-columns: repeat(4, 1fr);
@@ -251,14 +326,12 @@
 		column-gap: 40px;
 		justify-content: center;
 	}
-
 	.sushi-card {
 		display: flex;
 		flex-direction: column;
 		background: transparent;
 		color: $color-cream;
 	}
-
 	.sushi-image-wrapper {
 		position: relative;
 		width: 100%;
@@ -267,7 +340,6 @@
 		background: #0e1c33;
 		margin-bottom: 14px;
 	}
-
 	.sushi-image {
 		position: absolute;
 		inset: 0;
@@ -278,11 +350,8 @@
 		filter: brightness(96%);
 		transition: transform 0.6s ease;
 	}
-
 	.sushi-card:hover .sushi-image { transform: scale(1.04); }
-
 	.sushi-info { padding-top: 0; }
-
 	.sushi-top {
 		display: flex;
 		justify-content: space-between;
@@ -290,7 +359,6 @@
 		gap: 12px;
 		margin-bottom: 8px;
 	}
-
 	.sushi-name {
 		font-family: $font-title;
 		font-size: 0.88rem;
@@ -298,14 +366,12 @@
 		margin: 0;
 		letter-spacing: 0.15px;
 	}
-
 	.sushi-price {
 		font-family: $font-title;
 		font-size: 0.82rem;
 		font-weight: 600;
 		white-space: nowrap;
 	}
-
 	.sushi-desc {
 		font-family: $font-body;
 		font-size: 0.72rem;
@@ -313,7 +379,6 @@
 		margin: 0 0 12px;
 		color: $color-cream-light;
 	}
-
 	.sushi-divider {
 		border: none;
 		height: 1px;
@@ -322,18 +387,29 @@
 		margin: 0;
 	}
 }
-
+@media (max-width: 600px) {
+	.sushi-section {
+		.sushi-title { font-size: 2.2rem; }
+		.sushi-subtitle { font-size: 0.78rem; max-width: 100%; }
+		.sushi-grid {
+			grid-template-columns: repeat(2, 1fr);
+			column-gap: 18px;
+			row-gap: 34px;
+		}
+		.sushi-image-wrapper { margin-bottom: 10px; }
+		.sushi-name { font-size: 0.78rem; }
+		.sushi-price { font-size: 0.72rem; }
+		.sushi-desc { font-size: 0.64rem; line-height: 1.34; margin-bottom: 10px; }
+	}
+}
 // Hot Dishes & Add-ons
 .hotdish-section {
 	background-color: $color-blue;
-
 	.menu-main-section-inner { max-width: 1400px; margin: 0 auto; }
-
 	.menu-main-section-header {
 		text-align: center;
 		margin-bottom: 64px;
 	}
-
 	.hotdish-title {
 		font-family: $font-title;
 		font-size: 3.6rem;
@@ -341,7 +417,6 @@
 		margin: 0 0 12px;
 		color: $color-cream;
 	}
-
 	.hotdish-subtitle {
 		font-family: $font-body;
 		font-size: 0.92rem;
@@ -350,7 +425,6 @@
 		margin: 0 auto;
 		color: $color-cream-light;
 	}
-
 	.hotdish-grid {
 		display: flex;
 		flex-wrap: wrap;
@@ -363,20 +437,17 @@
 			width: calc(33.333% - 27px);
 			max-width: 360px;
 		}
-
 		.hotdish-card:nth-child(n+4) {
 			width: calc(33.333% - 27px);
 			max-width: 360px;
 		}
 	}
-
 	.hotdish-card {
 		display: flex;
 		flex-direction: column;
 		background: transparent;
 		color: $color-cream;
 	}
-
 	.hotdish-image-wrapper {
 		position: relative;
 		width: 100%;
@@ -385,7 +456,6 @@
 		background: #0e1c33;
 		margin-bottom: 16px;
 	}
-
 	.hotdish-image {
 		position: absolute;
 		inset: 0;
@@ -396,11 +466,8 @@
 		filter: brightness(96%);
 		transition: transform 0.6s ease;
 	}
-
 	.hotdish-card:hover .hotdish-image { transform: scale(1.04); }
-
 	.hotdish-info { padding-top: 0; }
-
 	.hotdish-top {
 		display: flex;
 		justify-content: space-between;
@@ -408,7 +475,6 @@
 		gap: 16px;
 		margin-bottom: 10px;
 	}
-
 	.hotdish-name {
 		font-family: $font-title;
 		font-size: 0.95rem;
@@ -416,14 +482,12 @@
 		margin: 0;
 		letter-spacing: 0.15px;
 	}
-
 	.hotdish-price {
 		font-family: $font-title;
 		font-size: 0.88rem;
 		font-weight: 600;
 		white-space: nowrap;
 	}
-
 	.hotdish-desc {
 		font-family: $font-body;
 		font-size: 0.78rem;
@@ -431,7 +495,6 @@
 		margin: 0 0 14px;
 		color: $color-cream-light;
 	}
-
 	.hotdish-divider {
 		border: none;
 		height: 1px;
@@ -440,31 +503,38 @@
 		margin: 0;
 	}
 }
-
+@media (max-width: 600px) {
+	.hotdish-section {
+		.hotdish-title { font-size: 2.2rem; }
+		.hotdish-subtitle { font-size: 0.78rem; max-width: 100%; }
+		.hotdish-grid { gap: 26px 18px; }
+		.hotdish-grid .hotdish-card,
+		.hotdish-grid .hotdish-card:nth-child(n+4) { width: calc(50% - 12px); max-width: 100%; }
+		.hotdish-image-wrapper { margin-bottom: 10px; aspect-ratio: 1 / 1; }
+		.hotdish-name { font-size: 0.78rem; }
+		.hotdish-price { font-size: 0.72rem; }
+		.hotdish-desc { font-size: 0.64rem; line-height: 1.34; margin-bottom: 10px; }
+	}
+}
 // Drinks & Desserts
 .drinks-section {
 	background-color: $color-blue;
-
 	.menu-main-section-inner { 
 		max-width: 1400px; 
 		margin: 0 auto; 
 	}
-
 	.drinks-columns {
 		display: grid;
 		grid-template-columns: repeat(2, 1fr);
 		column-gap: 80px;
 	}
-
 	.drinks-column {
 		display: flex;
 		flex-direction: column;
 	}
-
 	.drinks-header {
 		margin-bottom: 48px;
 	}
-
 	.drinks-title {
 		font-family: $font-title;
 		font-size: 2.8rem;
@@ -472,19 +542,16 @@
 		margin: 0;
 		color: $color-cream;
 	}
-
 	.drinks-list {
 		display: flex;
 		flex-direction: column;
 		gap: 32px;
 	}
-
 	.drinks-item {
 		display: flex;
 		flex-direction: column;
 		color: $color-cream;
 	}
-
 	.drinks-item-top {
 		display: flex;
 		justify-content: space-between;
@@ -492,7 +559,6 @@
 		gap: 16px;
 		margin-bottom: 8px;
 	}
-
 	.drinks-item-name {
 		font-family: $font-title;
 		font-size: 0.95rem;
@@ -501,7 +567,6 @@
 		letter-spacing: 0.15px;
 		line-height: 1.3;
 	}
-
 	.drinks-item-price {
 		font-family: $font-title;
 		font-size: 0.9rem;
@@ -509,7 +574,6 @@
 		white-space: nowrap;
 		flex-shrink: 0;
 	}
-
 	.drinks-item-desc {
 		font-family: $font-body;
 		font-size: 0.78rem;
@@ -517,7 +581,6 @@
 		margin: 0 0 12px;
 		color: $color-cream-light;
 	}
-
 	.drinks-divider {
 		border: none;
 		height: 1px;
@@ -526,7 +589,15 @@
 		margin: 0;
 	}
 }
-
+@media (max-width: 600px) {
+	.drinks-section {
+		.drinks-columns { grid-template-columns: 1fr; row-gap: 44px; column-gap: 0; }
+		.drinks-title { font-size: 2rem; }
+		.drinks-item-name { font-size: 0.78rem; }
+		.drinks-item-price { font-size: 0.72rem; }
+		.drinks-item-desc { font-size: 0.64rem; line-height: 1.34; margin-bottom: 10px; }
+	}
+}
 // Quote Menu Section
 .quote-menu-section {
 	position: relative;
@@ -539,7 +610,6 @@
 	align-items: center;
 	justify-content: center;
 }
-
 .quote-menu-video {
 	position: absolute;
 	inset: 0;
@@ -548,14 +618,12 @@
 	object-fit: cover;
 	z-index: 0;
 }
-
 .quote-menu-overlay {
 	position: absolute;
 	inset: 0;
 	background: rgba(0, 0, 0, 0.29);
 	z-index: 1;
 }
-
 .quote-menu-content {
 	position: relative;
 	z-index: 2;
@@ -564,7 +632,6 @@
 	max-width: 900px;
 	padding: 0 5%;
 }
-
 .quote-menu-text {
 	font-family: $font-title;
 	font-size: 2.8rem;
@@ -573,12 +640,30 @@
 	font-weight: 400;
 	letter-spacing: 0.5px;
 }
-
 .quote-menu-author {
 	font-family: $font-body;
 	font-size: 1rem;
 	font-style: normal;
 	color: $color-cream-light;
 	display: block;
+}
+@media (max-width: 600px) {
+	.quote-menu-section {
+		height: 52vh;
+		min-height: 320px;
+	}
+	.quote-menu-content { padding: 0 8%; }
+	.quote-menu-text {
+		font-size: 1.9rem;
+		line-height: 1.25;
+		letter-spacing: 0.3px;
+		margin-bottom: 8px;
+	}
+	.quote-menu-author { font-size: 0.78rem; }
+}
+@media (max-width: 400px) {
+	.quote-menu-section { height: 50vh; min-height: 300px; }
+	.quote-menu-text { font-size: 1.55rem; line-height: 1.22; }
+	.quote-menu-author { font-size: 0.7rem; }
 }
 

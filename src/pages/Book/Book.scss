@@ -22,7 +22,8 @@
 		background-size: cover;
 		background-position: center 55%;
 		filter: brightness(60%);
-		transform: translateY(var(--book-bg-offset, 0)) scale(1.04);
+		transform: translate3d(0,var(--book-bg-offset,0),0) scale(1.06);
+		will-change: transform;
 		z-index: 0;
 	}
 	.book-hero-content {
@@ -34,6 +35,13 @@
 		max-width: 1000px;
 		text-align: left;
 	}
+
+	.book-hero-subtitle,
+	.book-hero-title,
+	.book-hero-desc { opacity: 0; transform: translateY(42px); transition: opacity .9s cubic-bezier(.18,.62,.22,1), transform .9s cubic-bezier(.18,.62,.22,1); will-change: opacity, transform; }
+	.book-hero-subtitle { transition-delay: .05s; }
+	.book-hero-title { transition-delay: .18s; }
+	.book-hero-desc { transition-delay: .32s; }
 
 	.book-hero-subtitle {
 		font-family: $font-body;
@@ -60,6 +68,11 @@
 		max-width: 800px;
 		color: rgba($color-cream, 0.85);
 		text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+	}
+	&.book-hero-visible {
+		.book-hero-subtitle,
+		.book-hero-title,
+		.book-hero-desc { opacity: 1; transform: translateY(0); }
 	}
 }
 
@@ -282,6 +295,14 @@
 	box-shadow: 0 14px 42px rgba(0,0,0,0.35);
 	font-family: $font-body;
 	position: relative;
+	opacity: 0;
+	transform: translateY(48px) scale(0.98);
+	transition: opacity 0.35s cubic-bezier(.18,.62,.22,1), transform 0.35s cubic-bezier(.18,.62,.22,1);
+	will-change: opacity, transform;
+}
+.reservation-receipt.receipt-open {
+	opacity: 1;
+	transform: translateY(0) scale(1);
 }
 
 .rr-header { margin: 0 0 30px; text-align: center; }

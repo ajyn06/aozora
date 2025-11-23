@@ -5,6 +5,13 @@ const Book = () => {
   const heroRef = useRef<HTMLElement | null>(null);
   const bgRef = useRef<HTMLDivElement | null>(null);
   const formRef = useRef<HTMLFormElement | null>(null);
+  const guidelinesHeaderRef = useRef<HTMLElement | null>(null);
+  const guidelineRefs = useRef<(HTMLLIElement | null)[]>([]);
+  const customerInfoRef = useRef<HTMLDivElement | null>(null);
+  const metaRef = useRef<HTMLDivElement | null>(null);
+  const dateTimeRef = useRef<HTMLDivElement | null>(null);
+  const notesRef = useRef<HTMLDivElement | null>(null);
+  const submitRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const heroEl = heroRef.current;
@@ -15,24 +22,25 @@ const Book = () => {
     });
 
     let ticking = false;
+    const prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const handleScroll = () => {
       if (!heroEl || !bgEl) return;
-      const rect = heroEl.getBoundingClientRect();
-      const viewportH = window.innerHeight;
-      if (rect.bottom < 0 || rect.top > viewportH) return; 
-      const offset = rect.top * -0.25; 
-      bgEl.style.setProperty("--book-bg-offset", `${offset}px`);
+      if (prefersReduce) { bgEl.style.setProperty('--book-bg-offset','0px'); return; }
+      const heroTop = heroEl.offsetTop;
+      const scrollY = window.scrollY;
+      const heroHeight = heroEl.offsetHeight;
+      const progress = (scrollY - heroTop) / heroHeight; 
+      const rawOffset = progress * 90; 
+      const clamped = Math.max(-120, Math.min(120, rawOffset));
+      bgEl.style.setProperty('--book-bg-offset', clamped + 'px');
       ticking = false;
     };
     const onScroll = () => {
-      if (!ticking) {
-        ticking = true;
-        requestAnimationFrame(handleScroll);
-      }
+      if (!ticking) { ticking = true; requestAnimationFrame(handleScroll); }
     };
     handleScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
   const guidelines = [
@@ -58,7 +66,6 @@ const Book = () => {
     },
   ];
 
-  // Calendar 
   const [currentMonth, setCurrentMonth] = useState(() => {
     const d = new Date();
     d.setDate(1);
@@ -66,10 +73,18 @@ const Book = () => {
     return d;
   });
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-
-  // Receipt 
   const [showReceipt, setShowReceipt] = useState(false);
+  const [receiptVisible, setReceiptVisible] = useState(false);
   const [receiptData, setReceiptData] = useState<Record<string,string>>({});
+  const [guidelinesHeaderVisible, setGuidelinesHeaderVisible] = useState(false);
+  const [guidelineVisible, setGuidelineVisible] = useState<boolean[]>(() => guidelines.map(() => false));
+  const [formVis, setFormVis] = useState({
+    customer: false,
+    meta: false,
+    dateTime: false,
+    notes: false,
+    submit: false
+  });
 
   const goMonth = (delta: number) => {
     setCurrentMonth(prev => {
@@ -84,7 +99,7 @@ const Book = () => {
     return d.getDate();
   };
   const today = new Date(); today.setHours(0,0,0,0);
-  const firstWeekday = currentMonth.getDay(); // 0-6
+  const firstWeekday = currentMonth.getDay(); 
   const totalDays = daysInMonth(currentMonth);
   const monthLabel = currentMonth.toLocaleString("default", { month: "long", year: "numeric" });
 
@@ -95,14 +110,75 @@ const Book = () => {
   };
 
   const handleReturn = () => {
-    setShowReceipt(false);
-    setReceiptData({});
-    setSelectedDate(null);
+    setReceiptVisible(false);
+    setTimeout(() => {
+      setShowReceipt(false);
+      setReceiptData({});
+      setSelectedDate(null);
+    }, 350); 
     if (formRef.current) {
       formRef.current.reset();
       formRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   };
+
+  useEffect(() => {
+    const headerEl = guidelinesHeaderRef.current;
+    const items = guidelineRefs.current;
+    const prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduce) {
+      setGuidelinesHeaderVisible(true);
+      setGuidelineVisible(items.map(() => true));
+      return;
+    }
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        if (entry.target === headerEl) {
+          setGuidelinesHeaderVisible(true);
+        } else {
+          const idx = items.indexOf(entry.target as HTMLLIElement);
+          if (idx > -1) {
+            setGuidelineVisible(prev => {
+              if (prev[idx]) return prev;
+              const next = [...prev];
+              next[idx] = true;
+              return next;
+            });
+          }
+        }
+      });
+    }, { threshold: 0.2, rootMargin: '0px 0px -5% 0px' });
+    if (headerEl) observer.observe(headerEl);
+    items.forEach(el => el && observer.observe(el));
+    return () => observer.disconnect();
+  }, [guidelines]);
+
+  useEffect(() => {
+    const prefersReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const targets: [keyof typeof formVis, HTMLDivElement | null][] = [
+      ['customer', customerInfoRef.current],
+      ['meta', metaRef.current],
+      ['dateTime', dateTimeRef.current],
+      ['notes', notesRef.current],
+      ['submit', submitRef.current]
+    ];
+    if (prefersReduce) {
+      setFormVis({ customer:true, meta:true, dateTime:true, notes:true, submit:true });
+      return;
+    }
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const match = targets.find(t => t[1] === entry.target);
+        if (match) {
+          setFormVis(prev => prev[match[0]] ? prev : { ...prev, [match[0]]: true });
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -5% 0px' });
+    targets.forEach(([,el]) => el && observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <>
@@ -121,13 +197,33 @@ const Book = () => {
       </section>
       <section className="reservation-guidelines">
         <div className="reservation-guidelines-inner">
-          <header className="reservation-guidelines-header">
+          <header
+            ref={guidelinesHeaderRef}
+            className="reservation-guidelines-header"
+            style={{
+              opacity: guidelinesHeaderVisible ? 1 : 0,
+              transform: guidelinesHeaderVisible ? 'translateY(0)' : 'translateY(48px)',
+              transition: 'opacity 0.9s cubic-bezier(.18,.62,.22,1), transform 0.9s cubic-bezier(.18,.62,.22,1)',
+              willChange: 'opacity, transform'
+            }}
+          >
             <h2 className="rg-title">Reservation Guidelines</h2>
             <p className="rg-subtitle">A few notes to help us prepare a seamless experience.</p>
           </header>
           <ul className="rg-list">
-            {guidelines.map(g => (
-              <li key={g.title} className="rg-item">
+            {guidelines.map((g,i) => (
+              <li
+                key={g.title}
+                ref={el => { guidelineRefs.current[i] = el; }}
+                className="rg-item"
+                style={{
+                  opacity: guidelineVisible[i] ? 1 : 0,
+                  transform: guidelineVisible[i] ? 'translateY(0)' : 'translateY(42px)',
+                  transition: 'opacity 0.9s cubic-bezier(.18,.62,.22,1), transform 0.9s cubic-bezier(.18,.62,.22,1)',
+                  transitionDelay: guidelineVisible[i] ? `${0.05 + i * 0.06}s` : '0s',
+                  willChange: 'opacity, transform'
+                }}
+              >
                 <h3 className="rg-item-title">{g.title}</h3>
                 <p className="rg-item-desc">{g.desc}</p>
               </li>
@@ -147,10 +243,20 @@ const Book = () => {
             formData.forEach((v, k) => (data[k] = String(v)));
             setReceiptData(data);
             setShowReceipt(true);
+            setTimeout(() => setReceiptVisible(true), 10); 
             formEl.scrollIntoView({ behavior: "smooth", block: "start" });
           }}
         >
-          <div className="rf-customer-info">
+          <div
+            ref={customerInfoRef}
+            className="rf-customer-info"
+            style={{
+              opacity: formVis.customer ? 1 : 0,
+              transform: formVis.customer ? 'translateY(0)' : 'translateY(46px)',
+              transition: 'opacity 0.85s cubic-bezier(.18,.62,.22,1), transform 0.85s cubic-bezier(.18,.62,.22,1)',
+              willChange: 'opacity, transform'
+            }}
+          >
             <h2 className="rf-column-title">Customer Information</h2>
             <div className="rf-group">
               <label className="rf-label" htmlFor="firstName">First Name</label>
@@ -169,7 +275,16 @@ const Book = () => {
               <input className="rf-input" id="email" name="email" type="email" required />
             </div>
           </div>
-          <div className="rf-meta">
+          <div
+            ref={metaRef}
+            className="rf-meta"
+            style={{
+              opacity: formVis.meta ? 1 : 0,
+              transform: formVis.meta ? 'translateY(0)' : 'translateY(46px)',
+              transition: 'opacity 0.85s cubic-bezier(.18,.62,.22,1) 0.05s, transform 0.85s cubic-bezier(.18,.62,.22,1) 0.05s',
+              willChange: 'opacity, transform'
+            }}
+          >
             <div className="rf-group">
               <label className="rf-label" htmlFor="guestCount">Guest Count</label>
               <div className="rf-select-wrapper">
@@ -191,7 +306,16 @@ const Book = () => {
               </div>
             </div>
           </div>
-          <div className="rf-date-time">
+          <div
+            ref={dateTimeRef}
+            className="rf-date-time"
+            style={{
+              opacity: formVis.dateTime ? 1 : 0,
+              transform: formVis.dateTime ? 'translateY(0)' : 'translateY(46px)',
+              transition: 'opacity 0.85s cubic-bezier(.18,.62,.22,1) 0.1s, transform 0.85s cubic-bezier(.18,.62,.22,1) 0.1s',
+              willChange: 'opacity, transform'
+            }}
+          >
             <div className="rf-group">
               <label className="rf-label" htmlFor="date">Select a Date</label>
               <div className="rf-date-box">
@@ -242,7 +366,7 @@ const Book = () => {
                   for (let hour = startHour; hour <= endHour; hour++) {
                     for (const minute of [0, 30]) {
                       if (hour === startHour && minute < startMinute) continue;
-                      if (hour === endHour && minute > 0) break; // only 11:00 pm final
+                      if (hour === endHour && minute > 0) break;
                       const h12 = ((hour + 11) % 12) + 1;
                       const ampm = hour < 12 ? "am" : "pm";
                       const label = `${h12}:${minute.toString().padStart(2, "0")} ${ampm}`;
@@ -255,18 +379,39 @@ const Book = () => {
               </div>
             </div>
           </div>
-          <div className="rf-notes rf-group">
+          <div
+            ref={notesRef}
+            className="rf-notes rf-group"
+            style={{
+              opacity: formVis.notes ? 1 : 0,
+              transform: formVis.notes ? 'translateY(0)' : 'translateY(40px)',
+              transition: 'opacity 0.85s cubic-bezier(.18,.62,.22,1) 0.15s, transform 0.85s cubic-bezier(.18,.62,.22,1) 0.15s',
+              willChange: 'opacity, transform'
+            }}
+          >
             <label className="rf-label" htmlFor="notes">Special Requests / Notes</label>
             <textarea className="rf-textarea" id="notes" name="notes" placeholder="" />
           </div>
-          <div className="rf-submit-wrapper">
+          <div
+            ref={submitRef}
+            className="rf-submit-wrapper"
+            style={{
+              opacity: formVis.submit ? 1 : 0,
+              transform: formVis.submit ? 'translateY(0)' : 'translateY(36px)',
+              transition: 'opacity 0.85s cubic-bezier(.18,.62,.22,1) 0.2s, transform 0.85s cubic-bezier(.18,.62,.22,1) 0.2s',
+              willChange: 'opacity, transform'
+            }}
+          >
             <button type="submit" className="rf-submit-btn">Submit</button>
           </div>
         </form>
       </section>
       {showReceipt && (
-        <div className="reservation-receipt-overlay" onClick={() => setShowReceipt(false)}>
-          <div className="reservation-receipt" onClick={e => e.stopPropagation()}>
+        <div className="reservation-receipt-overlay" onClick={() => setReceiptVisible(false)}>
+          <div
+            className={`reservation-receipt${receiptVisible ? ' receipt-open' : ''}`}
+            onClick={e => e.stopPropagation()}
+          >
             <header className="rr-header">
               <h2 className="rr-title">Thank You for Reserving</h2>
               <p className="rr-subtitle">with Aozora</p>

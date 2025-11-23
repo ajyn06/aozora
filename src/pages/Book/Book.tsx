@@ -439,7 +439,7 @@ const Book = () => {
             </div>
             <hr className="rr-divider" />
             <div className="rr-actions">
-              <button type="button" className="rr-home-btn" onClick={handleReturn}>Return to Home</button>
+              <button type="button" className="rr-home-btn" onClick={handleReturn}>Return</button>
             </div>
           </div>
         </div>

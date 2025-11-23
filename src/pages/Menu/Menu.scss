@@ -98,12 +98,11 @@
 		letter-spacing: 0.5px;
 		transition: all 0.3s ease;
 		align-self: flex-start;
-		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 
 		&:hover {
-			background-color: color.adjust($color-blue, $lightness: -8%);
+			background-color: $color-black;
 			transform: translateY(-2px);
-			box-shadow: 0 6px 16px rgba(0, 0, 0, 0.28);
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 		}
 	}
 }

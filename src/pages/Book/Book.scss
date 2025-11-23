@@ -1,0 +1,340 @@
+@use "../../styles/variables.scss" as *;
+@use "sass:color";
+
+// Hero
+.book-hero {
+	position: relative;
+	width: 100vw;
+	height: 70vh;
+	min-height: 520px;
+	max-height: 860px;
+	overflow: hidden;
+	display: flex;
+	align-items: flex-end;
+	background-color: $color-blue;
+
+	.book-hero-bg {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		background-image: url('/Home/book-1.jpg');
+		background-size: cover;
+		background-position: center 55%;
+		filter: brightness(60%);
+		transform: translateY(var(--book-bg-offset, 0)) scale(1.04);
+		z-index: 0;
+	}
+	.book-hero-content {
+		position: relative;
+		z-index: 2;
+		color: $color-cream;
+		padding: 0 4% 65px;
+		width: 100%;
+		max-width: 1000px;
+		text-align: left;
+	}
+
+	.book-hero-subtitle {
+		font-family: $font-body;
+		font-weight: 600;
+		font-size: 1.8rem;
+		margin: 0;
+		letter-spacing: 0.02em;
+		text-transform: none;
+	}
+
+	.book-hero-title {
+		font-family: $font-title;
+		font-size: 7rem;
+		line-height: 0.92;
+		margin: 0 0 1.1rem;
+		text-shadow: 0 8px 32px rgba(0, 0, 0, 0.55);
+	}
+
+	.book-hero-desc {
+		font-family: $font-body;
+		font-size: 1.2rem;
+		line-height: 1.7;
+		margin: 0;
+		max-width: 800px;
+		color: rgba($color-cream, 0.85);
+		text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+	}
+}
+
+// Reservation Guidelines Section
+	.reservation-guidelines {
+	background-color: $color-blue;
+	color: $color-cream;
+	padding: 110px 0 130px;
+	.reservation-guidelines-inner {
+		max-width: 1300px;
+		margin: 0 auto;
+		padding: 0 7%;
+	}
+	.reservation-guidelines-header {
+		margin: 0 0 70px;
+		.rg-title {
+			font-family: $font-title;
+			font-size: 4.2rem;
+			line-height: 0.95;
+			margin: 0 0 12px;
+			color: $color-cream;
+		}
+		.rg-subtitle {
+			font-family: $font-body;
+			font-size: 0.95rem;
+			line-height: 1.55;
+			margin: 0;
+			max-width: 560px;
+			color: $color-cream;
+		}
+	}
+	.rg-list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+		gap: 54px 70px;
+	}
+	.rg-item {
+		display: flex;
+		flex-direction: column;
+		.rg-item-title {
+			font-family: $font-title;
+			font-size: 1.05rem;
+			margin: 0 0 10px;
+			letter-spacing: 0.15px;
+			color: $color-cream;
+		}
+		.rg-item-desc {
+			font-family: $font-body;
+			font-size: 0.78rem;
+			line-height: 1.45;
+			margin: 0;
+			max-width: 380px;
+			color: $color-cream;
+		}
+	}
+}
+@media (max-width: 600px) {
+	.reservation-guidelines {
+		padding: 80px 0 95px;
+		.reservation-guidelines-inner { padding: 0 8%; }
+		.reservation-guidelines-header {
+			margin-bottom: 48px;
+			.rg-title { font-size: 2.6rem; }
+			.rg-subtitle { font-size: 0.78rem; }
+		}
+		.rg-list { gap: 38px 38px; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+		.rg-item { .rg-item-title { font-size: 0.85rem; } .rg-item-desc { font-size: 0.66rem; line-height: 1.42; } }
+	}
+}
+
+@media (max-width: 420px) {
+	.reservation-guidelines {
+		padding: 70px 0 85px;
+		.reservation-guidelines-header { .rg-title { font-size: 2.3rem; } }
+		.rg-list { gap: 32px 28px; }
+	}
+}
+
+// Reservation Form 
+.reservation-form-section {
+	background-color: $color-cream;
+	color: $color-blue;
+	padding: 120px 0 140px;
+
+	.reservation-form-inner {
+		max-width: 1350px;
+		margin: 0 auto;
+		padding: 0 7%;
+		display: grid;
+		grid-template-columns: 1.2fr 0.8fr 0.8fr;
+		column-gap: 80px;
+	}
+
+	.rf-column-title {
+		font-family: $font-title;
+		font-size: 2rem;
+		margin: 0 0 50px;
+		line-height: 1;
+	}
+
+	.rf-group {
+		margin: 0 0 28px;
+		display: flex;
+		flex-direction: column;
+	}
+	.rf-label {
+		font-family: $font-body;
+		font-size: 0.75rem;
+		font-weight: 600;
+		letter-spacing: 0.4px;
+		margin: 0 0 10px;
+		text-transform: none;
+	}
+
+	.rf-input,
+	.rf-select,
+	.rf-textarea,
+	.rf-date-input {
+		font-family: $font-body;
+		font-size: 0.75rem;
+		color: $color-blue;
+		background: transparent;
+		border: none;
+		border-bottom: 1px solid $color-blue;
+		padding: 0 0 6px 0;
+		outline: none;
+		appearance: none;
+		letter-spacing: 0.3px;
+	}
+	.rf-input:focus,
+	.rf-select:focus,
+	.rf-textarea:focus,
+	.rf-date-input:focus { border-bottom-color: rgba($color-blue, 0.7); }
+	.rf-row-span { grid-column: 1; }
+	.rf-customer-info { grid-column: 1; }
+	.rf-meta { grid-column: 2 / span 2; display: grid; grid-template-columns: 1fr 1fr; column-gap: 60px; }
+
+	// Date & Time 
+	.rf-date-time { grid-column: 1 / span 3; display: grid; grid-template-columns: 1fr 1fr; column-gap: 120px; margin-top: 20px; }
+	.rf-date-box { position: relative; width: 100%; max-width: 400px; background: $color-cream; border: 1px solid $color-blue; padding: 0; }
+	.rf-calendar { width: 100%; display: flex; flex-direction: column; padding: 18px 22px 20px; }
+	// Calendar header
+	.rf-cal-header.redesigned { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+	.rf-cal-month { font-family: $font-title; font-size: 1.25rem; line-height: 1; letter-spacing: 0.6px; }
+	.rf-cal-nav { width: 40px; height: 40px; position: relative; background: transparent; border: none; cursor: pointer; }
+	.rf-cal-nav::before { content: ""; position: absolute; top: 50%; left: 50%; width: 12px; height: 12px; border: 2px solid $color-blue; border-top: none; border-right: none; transform: translate(-50%, -50%) rotate(135deg); transition: border-color .25s ease; }
+	.rf-cal-nav.next::before { transform: translate(-50%, -50%) rotate(-45deg); }
+	.rf-cal-nav:hover::before { border-color: rgba($color-blue, 0.6); }
+	.rf-cal-weekdays.redesigned { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; margin-bottom: 8px; }
+	.rf-cal-wd.redesigned { text-align: center; font-size: 0.68rem; font-family: $font-body; font-weight: 600; letter-spacing: 0.4px; opacity: 0.85; }
+	// Day grid
+	.rf-cal-grid.redesigned { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
+	.rf-cal-pad { display: block; }
+	.rf-cal-day.redesigned { background: transparent; border: none; font-family: $font-body; font-size: 0.72rem; cursor: pointer; color: $color-blue; line-height: 1; padding: 12px 0; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: background .25s ease, color .25s ease, box-shadow .25s ease; }
+	.rf-cal-day.redesigned:hover:not(.disabled):not(.selected) { background: $color-blue; color: $color-cream; }
+	.rf-cal-day.redesigned.selected { background: $color-blue; color: $color-cream; box-shadow: 0 0 0 2px rgba($color-blue, 0.3); }
+	.rf-cal-day.redesigned.disabled { opacity: 0.25; cursor: default; }
+
+	// Custom select arrow
+	.rf-select-wrapper { position:relative; display:block; width:100%; max-width:260px; }
+	.rf-select-wrapper:after { content:""; position:absolute; top:50%; right:4px; width:12px; height:12px; pointer-events:none; transform:translateY(-50%) rotate(45deg); border:2px solid $color-blue; border-top:none; border-left:none; transition:border-color .25s ease, transform .25s ease; }
+	.rf-select-wrapper:hover:after { border-color:rgba($color-blue,.6); }
+	.rf-select-wrapper:focus-within:after { border-color:$color-blue; transform:translateY(-50%) rotate(45deg) scale(1.08); }
+	.rf-select { width:100%; padding-right:30px; min-width:0; background:transparent; }
+	.rf-select option { font-size:0.78rem; font-family:$font-body; }
+	.rf-select option:hover { background:$color-blue; color:$color-cream; }
+	.rf-select::-ms-expand { display:none; }
+	.rf-select-wrapper.full { width:100%; }
+	.rf-group .rf-select-wrapper { margin-top:-2px; }
+	.rf-select:focus { border-bottom-color:rgba($color-blue,.7); }
+	.rf-label { font-size:0.8rem; }
+	.rf-input, .rf-select, .rf-textarea { font-size:0.8rem; }
+
+	.rf-notes { grid-column: 1 / span 2; margin-top: 40px; }
+	.rf-textarea { min-height: 60px; resize: none; border-bottom: 1px solid $color-blue; padding-top: 2px; }
+
+	.rf-submit-wrapper { grid-column: 1 / span 3; }
+	.rf-submit-btn {
+		display: inline-block;
+		font-family: $font-body;
+		font-size: 1rem;
+		color: $color-white;
+		background-color: $color-blue;
+		padding: 14px 40px;
+		border: none;
+		border-radius: 0;
+		cursor: pointer;
+		letter-spacing: 0.5px;
+		font-weight: 500;
+		transition: all 0.3s ease;
+		align-self: flex-start;
+	}
+	.rf-submit-btn:hover {
+		background-color: color.adjust($color-blue, $lightness: -8%);
+		transform: translateY(-2px);
+	}
+
+}
+
+// Receipt Modal
+.reservation-receipt-overlay {
+	position: fixed;
+	inset: 0;
+	background: rgba(0,0,0,0.55);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 2000;
+	padding: 40px 24px;
+}
+.reservation-receipt {
+	background: $color-cream;
+	color: $color-blue;
+	width: 100%;
+	max-width: 560px;
+	padding: 48px 56px 54px;
+	box-shadow: 0 14px 42px rgba(0,0,0,0.35);
+	font-family: $font-body;
+	position: relative;
+}
+
+.rr-header { margin: 0 0 30px; text-align: center; }
+.rr-title {
+	font-family: $font-title;
+	font-size: 2.4rem;
+	line-height: 1.04;
+	margin: 0 0 6px;
+}
+.rr-subtitle {
+	font-family: $font-body;
+	font-size: 0.82rem;
+	font-weight: 600;
+	letter-spacing: 0.55px;
+	margin: 0;
+}
+.rr-confirm-box {
+	background: $color-blue;
+	color: $color-cream;
+	padding: 16px 22px 18px;
+	max-width: 440px;
+	margin: 0 auto 34px;
+}
+.rr-confirm-text { font-size: 0.68rem; line-height: 1.42; margin: 0; letter-spacing: 0.32px; }
+.rr-divider {
+	border: none;
+	height: 1px;
+	background: $color-blue;
+	margin: 34px 0 30px;
+	opacity: 0.55;
+}
+.rr-section { display: flex; flex-direction: column; gap: 14px; }
+.rr-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; }
+.rr-label { font-family: $font-body; font-weight: 600; font-size: 0.7rem; letter-spacing: 0.45px; }
+.rr-value { font-family: $font-body; font-size: 0.7rem; line-height: 1.34; }
+.rr-actions { text-align: center; margin-top: 8px; }
+.rr-home-btn {
+	display: inline-block;
+	font-family: $font-body;
+	font-size: 1rem;
+	color: $color-white;
+	background-color: $color-blue;
+	padding: 14px 40px;
+	border: none;
+	border-radius: 0;
+	cursor: pointer;
+	letter-spacing: 0.5px;
+	font-weight: 500;
+	transition: all 0.3s ease;
+	margin-top: 8px;
+}
+.rr-home-btn:hover { 
+    background-color: $color-black; 
+    transform: translateY(-2px); 
+    box-shadow: 0 6px 16px rgba(0,0,0,0.28); }
+

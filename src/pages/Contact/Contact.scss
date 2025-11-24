@@ -64,3 +64,38 @@
   }
 }
 
+@media (max-width: 768px) {
+  .main-contact {
+    height: 420px;
+    .bg-video { filter: brightness(65%); min-height: 420px; }
+
+    .main-contact-content {
+      left: 6%;
+      bottom: 28px;
+      max-width: 86%;
+    }
+
+    .contact-hero-title { font-size: 4rem; }
+    .contact-hero-desc { font-size: 0.8rem; }
+  }
+}
+
+@media (max-width: 480px) {
+  .main-contact {
+    height: 420px;
+    .bg-video { filter: brightness(60%); min-height: 420px; }
+
+    .main-contact-content {
+      left: 5%;
+      right: 5%;
+      bottom: 18px;
+      max-width: 90%;
+      padding: 12px 14px;
+      border-radius: 6px;
+    }
+
+    .contact-hero-title { font-size: 3rem; line-height: 0.95; }
+    .contact-hero-desc { font-size: 0.7rem; margin-top: 0.4rem; }
+  }
+}
+

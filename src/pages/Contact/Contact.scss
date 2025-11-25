@@ -326,6 +326,7 @@
   }
 }
 
+// Visit Us Section
 .visit-us-section {
   width: 100%;
   padding: 10px 0;
@@ -354,6 +355,10 @@
         height: 100%;
         object-fit: cover;
         display: block;
+        will-change: transform;
+        transform: scale(1);
+        transform-origin: center center;
+        transition: transform 420ms cubic-bezier(0.22, 0.9, 0.3, 1);
       }
     }
 
@@ -402,29 +407,225 @@
 
     .visit-info-box {
       flex-direction: column;
-      gap: 32px;
-      padding: 40px;
+      gap: 3px;
+      padding: 20px;
     }
   }
 }
 
 @media (max-width: 600px) {
   .visit-us-section {
-    padding: 70px 0;
+    padding: 48px 0; 
 
     .visit-title {
       font-size: 2.6rem;
+      margin-left: 0; 
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .visit-us-content {
+      width: 95%;
+      margin: 0 auto;
+      padding: 0 4%;
     }
 
     .visit-image-container {
-      height: 320px;
+      height: 300px; 
+      overflow: hidden;
+    }
+
+    .visit-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     .visit-info-box {
-      padding: 32px;
+      padding: 24px; 
+      margin-top: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
 
       .visit-info-item p {
+        font-size: 0.8rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .visit-us-section {
+    padding: 36px 0;
+
+    .visit-title {
+      font-size: 2rem;
+      text-align: center;
+      margin-left: 0;
+      margin-bottom: 16px;
+    }
+
+    .visit-us-content {
+      width: 95%;
+      margin: 0 auto;
+      padding: 0 4%;
+    }
+
+    .visit-image-container {
+      height: 220px; 
+    }
+
+    .visit-info-box {
+      padding: 18px;
+      margin-top: 12px;
+
+      .visit-info-item p {
+        font-size: 0.5rem;
+        line-height: 1.5;
+      }
+    }
+  }
+}
+
+// Brand Section
+.brand-section {
+  width: 100%;
+  background: $color-cream;
+  padding: 40px 0 60px;
+
+  .brand-inner {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    gap: 50px;
+    align-items: stretch;
+    height: 1000px; 
+  }
+
+  .brand-image-container {
+    width: 50%; 
+    height: 100%;
+    overflow: hidden;
+
+    .brand-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 40%;
+      display: block;
+    }
+  }
+
+  .brand-text {
+    width: 40%;
+    position: relative;
+
+    .brand-text-inner {
+      position: absolute;
+      bottom: 36px;
+      left: 0;
+      max-width: 600px;
+    }
+
+    .brand-title {
+      font-family: $font-title;
+      color: $color-blue;
+      font-size: 6.4rem;
+      line-height: 0.85;
+      margin: 0 0 12px 0;
+    }
+
+    .brand-desc {
+      font-family: $font-body;
+      color: $color-blue;
+      font-size: 1.2rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+  }
+}
+
+.brand-image-container {
+  overflow: hidden;
+}
+
+.brand-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 420ms cubic-bezier(0.22, 0.9, 0.3, 1);
+}
+
+.brand-text-inner { will-change: transform, opacity; }
+
+@media (max-width: 900px) {
+  .brand-section {
+    .brand-inner {
+      flex-direction: column;
+      height: auto; 
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .brand-image-container {
+      width: 100%;
+      height: 360px; 
+    }
+
+    .brand-image {
+      object-position: center 40%;
+    }
+
+    .brand-text {
+      width: 100%;
+
+      .brand-text-inner {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        padding: 28px 0 36px 0;
+        max-width: 100%;
+      }
+
+      .brand-title {
+        font-size: 3.2rem;
+        line-height: 1;
+      }
+
+      .brand-desc {
+        font-size: 1rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .brand-section {
+    padding: 28px 0 36px;
+
+    .brand-inner {
+      gap: 18px;
+    }
+
+    .brand-image-container {
+      height: 260px; 
+    }
+
+    .brand-text {
+      .brand-text-inner {
+        padding: 16px 0 20px 0;
+      }
+
+      .brand-title {
+        font-size: 2.4rem;
+      }
+
+      .brand-desc {
         font-size: 0.95rem;
+        line-height: 1.5;
       }
     }
   }

@@ -1,9 +1,53 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import "./Contact.scss";
 
 const Contact = () => {
   const [showNotification, setShowNotification] = useState(false);
+  const visitImageRef = useRef<HTMLImageElement | null>(null);
+  const visitImageContainerRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    let rafId = 0;
+
+    const handleParallax = () => {
+      const img = visitImageRef.current;
+      const container = visitImageContainerRef.current;
+      if (!img || !container) return;
+
+      const rect = container.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      const windowWidth = window.innerWidth;
+
+      // Compute progress of the container entering the viewport from bottom to top.
+      // progress = 0 when container bottom is below viewport bottom; progress = 1 when container top is at or above viewport top.
+      const progressRaw = (windowHeight - rect.top) / (windowHeight + rect.height);
+      const progress = Math.max(0, Math.min(1, progressRaw));
+
+      // zoom-only effect: stronger on larger screens
+      const maxScale = windowWidth > 480 ? 1.12 : 1.06;
+      const targetScale = 1 + progress * (maxScale - 1);
+
+      // Apply target scale directly; CSS transition will smooth changes both ways.
+      img.style.transform = `scale(${targetScale})`;
+    };
+
+    const onScroll = () => {
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(handleParallax);
+    };
+
+    // initial position
+    handleParallax();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
+  }, []);
 
   const handleContactSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -92,6 +136,8 @@ const Contact = () => {
           <img src="/Home/contact-img.jpg" alt="Sushi with chopsticks" className="contact-image" />
         </div>
       </section>
+      
+      
 
       <section className="visit-us-section">
   <motion.h2
@@ -104,12 +150,13 @@ const Contact = () => {
     Visit Us
   </motion.h2>
 
-  <div className="visit-us-content">
-    <div className="visit-image-container">
+    <div className="visit-us-content">
+    <div className="visit-image-container" ref={visitImageContainerRef}>
       <img
         src="/Home/visitus.jpg"
         alt="Restaurant Interior"
         className="visit-image"
+        ref={visitImageRef}
       />
     </div>
     <div className="visit-info-box">
@@ -145,7 +192,40 @@ const Contact = () => {
   </div>
 </section>
 
-      {/* Notification */}
+{/* Brand Section */}
+      <section className="brand-section">
+        <motion.div
+          className="brand-inner"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+        >
+          <div className="brand-image-container">
+            <motion.img
+              src="/Home/aozora-contact.jpg"
+              alt="Restaurant interior"
+              className="brand-image"
+              whileHover={{ scale: 1.03 }}
+              transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+            />
+          </div>
+          <div className="brand-text">
+            <motion.div
+              className="brand-text-inner"
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.8, delay: 0.15 }}
+            >
+              <h2 className="brand-title">AOZORA</h2>
+              <p className="brand-desc">Nestled in the heart of Taguig, Aozora offers a serene escape from the city — where the warmth of Japanese hospitality meets timeless culinary artistry. Find us below and plan your visit.</p>
+            </motion.div>
+          </div>
+        </motion.div>
+      </section>
+
+          {/* Notification */}
       {showNotification && (
         <motion.div
           className="notification-toast"
@@ -165,3 +245,7 @@ const Contact = () => {
 };
 
 export default Contact;
+
+// Parallax setup: refs and effect placed below to avoid re-ordering large JSX above.
+
+// Brand section moved below Visit Us for layout requested by user

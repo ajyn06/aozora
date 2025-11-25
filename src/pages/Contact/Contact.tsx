@@ -14,21 +14,13 @@ const Contact = () => {
       const img = visitImageRef.current;
       const container = visitImageContainerRef.current;
       if (!img || !container) return;
-
       const rect = container.getBoundingClientRect();
       const windowHeight = window.innerHeight;
       const windowWidth = window.innerWidth;
-
-      // Compute progress of the container entering the viewport from bottom to top.
-      // progress = 0 when container bottom is below viewport bottom; progress = 1 when container top is at or above viewport top.
       const progressRaw = (windowHeight - rect.top) / (windowHeight + rect.height);
       const progress = Math.max(0, Math.min(1, progressRaw));
-
-      // zoom-only effect: stronger on larger screens
       const maxScale = windowWidth > 480 ? 1.12 : 1.06;
       const targetScale = 1 + progress * (maxScale - 1);
-
-      // Apply target scale directly; CSS transition will smooth changes both ways.
       img.style.transform = `scale(${targetScale})`;
     };
 
@@ -36,8 +28,6 @@ const Contact = () => {
       if (rafId) cancelAnimationFrame(rafId);
       rafId = requestAnimationFrame(handleParallax);
     };
-
-    // initial position
     handleParallax();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
@@ -137,9 +127,7 @@ const Contact = () => {
         </div>
       </section>
       
-      
-
-      <section className="visit-us-section">
+<section className="visit-us-section">
   <motion.h2
     className="visit-title"
     initial={{ opacity: 0, y: 30 }}
@@ -245,7 +233,3 @@ const Contact = () => {
 };
 
 export default Contact;
-
-// Parallax setup: refs and effect placed below to avoid re-ordering large JSX above.
-
-// Brand section moved below Visit Us for layout requested by user

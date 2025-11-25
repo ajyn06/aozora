@@ -145,6 +145,7 @@
           color: $color-cream;
           background-color: transparent;
           border: none;
+          border-radius: 0;
           border-bottom: 1px solid rgba(255,255,255,0.25);
           padding: 0 0 10px 0;
           outline: none;
@@ -482,7 +483,7 @@
       margin-top: 12px;
 
       .visit-info-item p {
-        font-size: 0.5rem;
+        font-size: 0.8rem;
         line-height: 1.5;
       }
     }

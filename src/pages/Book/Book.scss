@@ -223,6 +223,7 @@
 		background: transparent;
 		border: none;
 		border-bottom: 1px solid $color-blue;
+		border-radius: 0;
 		padding: 0 0 6px 0;
 		outline: none;
 		appearance: none;
@@ -231,7 +232,7 @@
 	.rf-input:focus,
 	.rf-select:focus,
 	.rf-textarea:focus,
-	.rf-date-input:focus { border-bottom-color: rgba($color-blue, 0.7); }
+	.rf-date-input:focus { border-bottom-color: rgba($color-blue, 0.7); border-radius: 0;}
 	.rf-row-span { grid-column: 1; }
 	.rf-customer-info { grid-column: 1; }
 	.rf-meta { grid-column: 2 / span 2; display: grid; grid-template-columns: 1fr 1fr; column-gap: 60px; }
@@ -259,9 +260,9 @@
 
 	// Custom select arrow
 	.rf-select-wrapper { position:relative; display:block; width:100%; max-width:260px; }
-	.rf-select-wrapper:after { content:""; position:absolute; top:50%; right:4px; width:12px; height:12px; pointer-events:none; transform:translateY(-50%) rotate(45deg); border:2px solid $color-blue; border-top:none; border-left:none; transition:border-color .25s ease, transform .25s ease; }
+	.rf-select-wrapper:after { content:""; position:absolute; top:50%; right:4px; width:12px; height:12px; pointer-events:none; transform:translateY(-50%) rotate(45deg); border:2px solid $color-blue; border-radius: 0; border-top:none; border-left:none; transition:border-color .25s ease, transform .25s ease; }
 	.rf-select-wrapper:hover:after { border-color:rgba($color-blue,.6); }
-	.rf-select-wrapper:focus-within:after { border-color:$color-blue; transform:translateY(-50%) rotate(45deg) scale(1.08); }
+	.rf-select-wrapper:focus-within:after { border-color:$color-blue; border-radius: 0;transform:translateY(-50%) rotate(45deg) scale(1.08); }
 	.rf-select { width:100%; padding-right:30px; min-width:0; background:transparent; }
 	.rf-select option { font-size:0.78rem; font-family:$font-body; }
 	.rf-select option:hover { background:$color-blue; color:$color-cream; }
@@ -311,7 +312,7 @@
 		.rf-customer-info { grid-column: auto; order: 1; }
 		.rf-meta { grid-column: auto; order: 2; display: grid; grid-template-columns: 1fr; column-gap: 0; row-gap: 18px; width: 100%; }
 		.rf-date-time { grid-column: auto; order: 3; display: grid; grid-template-columns: 1fr; column-gap: 0; margin-top: 12px; width: 100%; }
-		.rf-date-box { max-width: 100%; border: 1px solid $color-blue; }
+		.rf-date-box { max-width: 100%; border: 1px solid $color-blue; border-radius: 0;}
 		.rf-select-wrapper { max-width: 100%; width: 100%; }
 		.rf-row-span, .rf-notes { grid-column: auto; }
 		.rf-notes { order: 4; margin-top: 16px; }

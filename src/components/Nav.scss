@@ -1,3 +1,5 @@
+// alias for case-insensitive imports on Linux builders
+@import "./Nav.scss";
 @use "../styles/variables.scss" as *;
 
 .nav-header {
